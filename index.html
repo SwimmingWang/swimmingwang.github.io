@@ -3,28 +3,90 @@ layout: default
 title : Homepage
 navbar_title: Home
 ---
-{% include widgets/profile_card.html %}
+<div class="top-space"></div>
 
-{% include widgets/debug_repo_name.html %}
+<section id="profile" class="mb-4">
+    {% include widgets/profile_card.html %}
+</section>
 
-{% include widgets/debug_url.html %}
-
-{% if site.data.display.homepage.show_experience %}
-    {% include widgets/experience_card.html %}
-{% endif %}
-
-{% if site.data.display.homepage.show_news %}
-    {% assign count_news = site.news | size %}
-    {% if count_news > 0 %}
-        {% include widgets/news_card.html limit=site.data.display.homepage.num_news %}
+<section id="news" class="mb-4"></section>
+    {% if site.data.display.homepage.show_news %}
+        {% assign count_news = site.news | size %}
+        {% if count_news > 0 %}
+            {% include widgets/news_card.html limit=site.data.display.homepage.num_news %}
+        {% endif %}
     {% endif %}
-{% endif %}
+</section>
 
-{% if site.data.display.homepage.show_selected_publications %}
-    {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
-    {% 
-        include widgets/publication_card.html 
-        publications=pubs
-        title='<i class="fas fa-star"></i> Selected Publications'
-    %}
-{% endif %}
+<section id="education" class="mb-4">
+    {% include widgets/education_card.html %}
+</section>
+
+<section id="experiences">
+    <h6 class="section-title mb-3 mt-4" style="font-size: 1.5rem;">Experience</h6>
+    <div class="row">
+        {% for experience in site.data.profile.experience %}
+        <div class="col-12 col-md-6 col-lg-4">
+            {% include widgets/experience_card.html experience=experience %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="publications" class="mb-4">
+    {% if site.data.display.homepage.show_selected_publications %}
+        {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
+        {% 
+            include widgets/publication_card.html 
+            publications=pubs
+            title='<i class="fas fa-star"></i> Selected Publications'
+        %}
+    {% endif %}
+</section>
+
+<section id="projects">
+    <h6 class="section-title mb-3 mt-4" style="font-size: 1.5rem;">Selected Projects</h6>
+    <div class="row g-4">
+        {% for project in site.data.profile.projects limit:2 %}
+        <div class="col-12 col-md-12 col-lg-6 mb-4">
+            {% include widgets/project_card.html project=project %}
+        </div>
+        {% endfor %}
+        
+        {% for project in site.data.profile.projects offset:2 %}
+        <div class="col-12 col-md-12 col-lg-6 mb-4">
+            {% include widgets/project_card.html project=project %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="honors" class="mb-4">
+    {% include widgets/awards_card.html %}
+</section>
+
+<section id="about">
+    {% include widgets/about_me_card.html %}
+</section>
+
+<div class="clustrmap-container text-center my-5">
+    <div class="col-6 col-md-4 col-lg-3 mx-auto">
+        <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=XHaXkpOTTE5tc91XdgumuUNVKkhiazgLFtFwzyDAiv4"></script>
+    </div>
+</div>
+
+<style>
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.2rem !important;
+    }
+    
+    #projects .col-12 {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    #projects .col-12:last-child {
+        margin-bottom: 2rem !important;
+    }
+}
+</style>

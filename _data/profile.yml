@@ -3,16 +3,13 @@ secondary_name: ""
 navbar_name: "Shanyong Wang"
 
 # positions:
-# - logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
-#   name: Position 1 with logo
-# - name: Position 2 without logo
-
+# - name: Undergraduate @TongjiUni
 
 email: "wangshy04@gmail.com"
 # cv_link: link-to-your-cv-file
-# gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
+# gscholar: 
 github: SwimmingWang
-twitter: Swimmingwang04  # Do not include the '@' symbol
+twitter: Swimmingwang04
 linkedin: shanyong-wang
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
@@ -23,7 +20,7 @@ linkedin: shanyong-wang
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    Hi, my name is Shanyong Wang, an undergraduate student at <a href="https://www.shanghaitech.edu.cn/eng/" target="_blank">ShanghaiTech University</a>.
+    Hi👋, my name is Shanyong Wang, an undergraduate student at <a href="https://www.shanghaitech.edu.cn/eng/" target="_blank">ShanghaiTech University</a>.
   </p>
   <p>
     I am now attending an exchange program at <a href="https://illinois.edu/" target="_blank">UIUC</a>.
@@ -45,16 +42,31 @@ education:
   position: B.S. in Computer Science
   date: Sep. 2022 - present
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
+experience:
+  - company: "University of Illinois Urbana-Champaign"
+    position: "Undergraduate Researcher"
+    date: "Oct. 2024 - present"
+    logo: "/assets/images/badges/UIUC.png"
+    brief: "LLM agent ai"
+
+  - company: "ShanghaiTech University"
+    position: "Undergraduate Researcher"
+    date: "Aug. 2024 - present"
+    logo: "/assets/images/badges/shanghaitech.jpg"
+    brief: "Human-computer Interaction"
 
 # awards:
-# - name: Award Name 2
-#   date: 2024
-# - name: Award Name 1 
-#   date: 2021
-# - name: A quick brown fox jumps over the lazy dog and runs away award
-#   date: 2021
+# - name:
+#   date:
+
+# projects:
+#   - title: 
+#     image: 
+#     description: 
+#     highlight: 
+#     highlight_url: 
+#     links:
+#       - name: 
+#         url: 
+#       - name: 
+#         url: 
