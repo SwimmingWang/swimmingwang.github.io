@@ -1,0 +1,128 @@
+<div class="row mt-3">
+    <div class="col">
+        <div class="card education-card border-0 shadow-sm bg-white">
+            <div class="card-body p-4">
+                {% if site.data.profile.education %}
+                <h6 class="mb-3 education-title">Education</h6>
+                <ul class="list-unstyled mb-0">
+                    {% for item in site.data.profile.education %}
+                    <li class="education-item media">
+                        {% if item.logo %}
+                        <div class="logo-container mr-4 p-2 d-flex align-items-center">
+                            <img src="{{ item.logo | relative_url }}" alt="{{ item.school }}" class="education-logo">
+                        </div>
+                        {% endif %}
+                        <div class="media-body">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <div class="school-name"><strong>{{ item.school }}</strong></div>
+                                <div class="education-date"><em>{{ item.date }}</em></div>
+                            </div>
+                            <div class="text-muted mb-1 education-major">{{ item.major }}</div>
+                            {% if item.submajor %}
+                            <div class="text-muted education-submajor">{{ item.submajor }}</div>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.education-item {
+    transition: all 0.3s ease;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    border: 1px solid transparent;
+}
+
+.education-item:hover {
+    background-color: #f8f9fa;
+    border-color: #e9ecef;
+}
+
+.education-item.media {
+    margin-bottom: 0 !important;
+}
+
+.education-title {
+    font-size: 1.6rem;
+}
+
+.logo-container {
+    min-width: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.education-logo {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+}
+
+.school-name {
+    font-size: 1.4rem;
+}
+
+.education-date {
+    font-size: 1.1rem;
+}
+
+.education-major,
+.education-submajor {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .education-card .card-body {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .education-item.media {
+        margin-bottom: 0 !important;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .education-item.media:last-child {
+        margin-bottom: 0 !important;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .education-title {
+        font-size: 1.2rem !important;
+    }
+
+    .school-name {
+        font-size: 1.1rem;
+    }
+
+    .education-date {
+        font-size: 0.9rem;
+        align-self: center;
+    }
+
+    .education-major,
+    .education-submajor {
+        font-size: 0.9rem;
+    }
+
+    .education-logo {
+        width: 64px;
+        height: 64px;
+    }
+
+    .logo-container {
+        min-width: 48px;
+        margin-right: 0.8rem !important;
+        align-self: center;
+    }
+}
+</style> 
