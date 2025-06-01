@@ -23,7 +23,7 @@ short_bio: >-
     Hi there👋 I'm Shanyong Wang, an undergraduate student at <a href="https://www.shanghaitech.edu.cn/eng/" target="_blank">ShanghaiTech University</a>.
   </p>
 
-# portrait_url: /assets/images/photos/portrait.png
+portrait_url: /assets/images/photos/wsy.jpg
 # portrait_caption: >-
 #   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
@@ -49,7 +49,7 @@ experience:
   - company: "The Rutgers University"
     position: "Research Intern"
     date: "Jun. 2025 - Present"
-    logo: "/assets/images/badges/ohio_logo.png"
+    logo: "/assets/images/badges/rutgers.png"
     brief: ""
 
   - company: "University of Illinois Urbana-Champaign(UIUC)"

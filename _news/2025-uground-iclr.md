@@ -1,6 +1,5 @@
 ---
 title: >-
-    <a href="https://osu-nlp-group.github.io/UGround">UGround</a> was accepted as
-    <span class="badge badge-pill badge-primary">ICLR 2025 Oral (1.8%)</span>! 
-date: 2025-02-11 09:00:00 +0800
+    We publish a paper named <a href="https://decisionflow-uiuc.github.io/">DecisionFlow</a>, a novel decision modeling framework. And happliy end my exchange at UIUC.
+date: 2025-05-19 09:00:00 +0800
 --- 
