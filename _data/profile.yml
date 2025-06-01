@@ -23,20 +23,20 @@ short_bio: >-
     Hi there👋 I'm Shanyong Wang, an undergraduate student at <a href="https://www.shanghaitech.edu.cn/eng/" target="_blank">ShanghaiTech University</a>.
   </p>
 
-portrait_url: /assets/images/photos/portrait.png
+# portrait_url: /assets/images/photos/portrait.png
 # portrait_caption: >-
 #   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
 education:
   - school: ShanghaiTech University
     major: Bachelor of Computer Science
-    logo: /assets/images/badges/tongji_logo.png
+    logo: /assets/images/badges/shanghaitech.jpg
     date: Sept. 2022 - Jun. 2026
 
   - school: University of Illinois Urbana-Champaign(UIUC)
     major: Visiting Student
     submajor: Electrical Engineering and Computer Sciences
-    logo: /assets/images/badges/berkeley_logo.png
+    logo: /assets/images/badges/UIUC.png
     date: Aug. 2024 - May. 2025
 
 # experience:
@@ -55,13 +55,13 @@ experience:
   - company: "University of Illinois Urbana-Champaign(UIUC)"
     position: "Undergraduate Researcher"
     date: "Oct. 2024 - May. 2025"
-    logo: "/assets/images/badges/bytedance_logo.png"
+    logo: "/assets/images/badges/UIUC.png"
     brief: ""
 
   - company: "ShanghaiTech Univeristy"
     position: "Undergraduate Researcher"
     date: ""
-    logo: "/assets/images/badges/berkeley_logo.png"
+    logo: "/assets/images/badges/shanghaitech.jpg"
     brief: "Building and analyzing Irish <br> drama corpus"
 
 awards:
