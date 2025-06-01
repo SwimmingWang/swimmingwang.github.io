@@ -2,8 +2,8 @@ primary_name: "Shanyong Wang"
 secondary_name: ""
 navbar_name: "Shanyong Wang"
 
-# positions:
-# - name: Undergraduate @TongjiUni
+positions:
+- name: Undergraduate @ShanghaiTech
 
 # cv_link: link-to-your-cv-file
 gscholar: https://scholar.google.com/citations?hl=en&user=JoHj0DIAAAAJ
@@ -39,12 +39,6 @@ education:
     logo: /assets/images/badges/UIUC.png
     date: Aug. 2024 - May. 2025
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
-
 experience:
   - company: "The Rutgers University"
     position: "Research Intern"
@@ -64,19 +58,19 @@ experience:
     logo: "/assets/images/badges/shanghaitech.jpg"
     brief: "Building and analyzing Irish <br> drama corpus"
 
-awards:
-- name: No. 352 (Top 1%), Alibaba Global Mathematics Competition Qualifying Round
-  date: Jun. 2024
+# awards:
+# - name: No. 352 (Top 1%), Alibaba Global Mathematics Competition Qualifying Round
+#   date: Jun. 2024
 
-projects:
-  - title: "Life Buddy"
-    image: "assets/images/projects/life-buddy.png"
-    description: "Your personal lifestyle assistant for a budget-friendly life. Discover affordable dining, nail salons, entertainment, and more—all tailored to your preferences."
-    highlight: "2nd Winner @Baidu AGI Hackathon"
-    highlight_url: "https://aistudio.baidu.com/competition/detail/1103/0/introduction"
-    links:
-      - name: "Official Intro"
-        url: "https://hub.baai.ac.cn/view/33801"
-      - name: "Post"
-        url: "https://www.linkedin.com/posts/demi-ruohanwang_aihackathon-ai-innovation-activity-7142910582927540224-0iTP"
+# projects:
+#   - title: "Life Buddy"
+#     image: "assets/images/projects/life-buddy.png"
+#     description: "Your personal lifestyle assistant for a budget-friendly life. Discover affordable dining, nail salons, entertainment, and more—all tailored to your preferences."
+#     highlight: "2nd Winner @Baidu AGI Hackathon"
+#     highlight_url: "https://aistudio.baidu.com/competition/detail/1103/0/introduction"
+#     links:
+#       - name: "Official Intro"
+#         url: "https://hub.baai.ac.cn/view/33801"
+#       - name: "Post"
+#         url: "https://www.linkedin.com/posts/demi-ruohanwang_aihackathon-ai-innovation-activity-7142910582927540224-0iTP"
     
