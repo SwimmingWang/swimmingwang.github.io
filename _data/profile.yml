@@ -20,7 +20,7 @@ email: "wangshy04@gmail.com"
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    Hi there👋 My name is Shanyong Wang. I am a junior undergraduate at <strong>ShanghaiTech University</strong> and an exchange student at <strong>UIUC</strong> in 2024, majoring in computer science. I am very fortunate to join the UIUC <a href="https://blender.cs.illinois.edu/" target="_blank">BLENDER Lab</a> advised by Prof. <a href="https://blender.cs.illinois.edu/hengji.html" target="_blank">Heng Ji</a> and mentor <a href="https://xiusic.github.io/" target="_blank">Xiusi Chen</a>. I also work closing with Prof. <a href="https://bme.shanghaitech.edu.cn/bme_en/2021/0326/c8252a1073789/page.htm" target="_blank">Ze Xiong</a> at <a href="https://xiong-group.com/" target="_blank">WiSe lab</a> back in ShanghaiTech University.
+    Hi there👋 My name is Shanyong Wang. I am a junior undergraduate at <strong>ShanghaiTech University</strong> and an exchange student at <strong>UIUC</strong> in 2024, majoring in computer science. I am very fortunate to join UIUC <a href="https://blender.cs.illinois.edu/" target="_blank">BLENDER Lab</a>, advised by Prof. <a href="https://blender.cs.illinois.edu/hengji.html" target="_blank">Heng Ji</a> and mentor <a href="https://xiusic.github.io/" target="_blank">Xiusi Chen</a>. I also work closing with Prof. <a href="https://bme.shanghaitech.edu.cn/bme_en/2021/0326/c8252a1073789/page.htm" target="_blank">Ze Xiong</a> at <a href="https://xiong-group.com/" target="_blank">WiSe lab</a> back in ShanghaiTech University.
   </p>
   <p>
     My Chinese name is 王善泳. My pronouns are He/Him/His.
@@ -56,7 +56,7 @@ experience:
     brief: "Design a novel decision modeling framework."
 
   - company: "ShanghaiTech Univeristy"
-    position: "Undergraduate Researcher"
+    position: "Advised by Prof. <a href='https://blender.cs.illinois.edu/hengji.html' target='_blank'>Heng Ji</a> and mentor <a href='https://xiusic.github.io/' target='_blank'>Xiusi Chen</a>"
     date: ""
     logo: "/assets/images/badges/shanghaitech.jpg"
     brief: "Designed, modeled, and coded various virtual environments."
