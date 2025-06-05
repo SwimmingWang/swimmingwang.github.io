@@ -44,19 +44,19 @@ education:
 
 experience:
   - company: "Rutgers University"
-    position: "Research Intern"
+    position: "Advised by Prof. <a href='https://yongfeng.me/' target='_blank'>Yongfeng Zhang</a>."
     date: "Jun. 2025 - Present"
     logo: "/assets/images/badges/rutgers.png"
     brief: "Design for AIOS."
 
   - company: "University of Illinois Urbana-Champaign(UIUC)"
-    position: "Undergraduate Researcher"
+    position: "Advised by Prof. <a href='https://blender.cs.illinois.edu/hengji.html' target='_blank'>Heng Ji</a> and mentor <a href='https://xiusic.github.io/' target='_blank'>Xiusi Chen</a>."
     date: "Oct. 2024 - May. 2025"
     logo: "/assets/images/badges/UIUC.png"
     brief: "Design a novel decision modeling framework."
 
   - company: "ShanghaiTech Univeristy"
-    position: "Advised by Prof. <a href='https://blender.cs.illinois.edu/hengji.html' target='_blank'>Heng Ji</a> and mentor <a href='https://xiusic.github.io/' target='_blank'>Xiusi Chen</a>"
+    position: "Advised by Prof. <a href='https://bme.shanghaitech.edu.cn/bme_en/2021/0326/c8252a1073789/page.htm' target='_blank'>Ze Xiong</a>."
     date: ""
     logo: "/assets/images/badges/shanghaitech.jpg"
     brief: "Designed, modeled, and coded various virtual environments."
