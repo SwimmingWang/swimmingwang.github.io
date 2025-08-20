@@ -3,7 +3,7 @@ title: "DecisionFlow: Advancing Large Language Model as Principled Decision Make
 date: 2025-05-27
 selected: true
 pub: "EMNLP 2025 Findings"
-pub_date: "2025"
+# pub_date: "2025"
 # pub_last: ' <span class="badge badge-pill badge-primary">Oral (1.8%)</span>'
 cover: /assets/images/covers/decisionflow_image.png
 abstract: >-
