@@ -1,4 +1,4 @@
-primary_name: "Shanyong Wang"
+primary_name: "Shanyong Wang(王善泳)"
 secondary_name: ""
 navbar_name: "Shanyong Wang"
 
@@ -20,11 +20,15 @@ email: "wangshy04@gmail.com"
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    Hi there👋 My name is Shanyong Wang. I am a junior undergraduate at <strong>ShanghaiTech University</strong> and an exchange student at <strong>UIUC</strong> in 2024, majoring in computer science. I am very fortunate to join UIUC <a href="https://blender.cs.illinois.edu/" target="_blank">BLENDER Lab</a>, advised by Prof. <a href="https://blender.cs.illinois.edu/hengji.html" target="_blank">Heng Ji</a> and mentor <a href="https://xiusic.github.io/" target="_blank">Xiusi Chen</a>. I also work closing with Prof. <a href="https://bme.shanghaitech.edu.cn/bme_en/2021/0326/c8252a1073789/page.htm" target="_blank">Ze Xiong</a> at <a href="https://xiong-group.com/" target="_blank">WiSe lab</a> back in ShanghaiTech University.
+  Hi there 👋 I'm <strong>Shanyong Wang</strong>, a senior undergraduate at <strong>ShanghaiTech University</strong> and an exchange student at <strong>UIUC</strong> (2024-2025), majoring in Computer Science.
   </p>
   <p>
-    My Chinese name is 王善泳. My pronouns are He/Him/His.
+  I had a wonderful summer at Rutgers University working with Prof. <a href="https://yongfeng.me/" target="_blank">Yongfeng Zhang</a>. Previously, I was fortunate to be a member of the <a href="https://blender.cs.illinois.edu/" target="_blank">BLENDER Lab</a> at UIUC, advised by Prof. <a href="https://blender.cs.illinois.edu/hengji.html" target="_blank">Heng Ji</a> and mentored by <a href="https://xiusic.github.io/" target="_blank">Xiusi Chen</a>. I also closely collaborate with Prof. <a href="https://bme.shanghaitech.edu.cn/bme_en/2021/0326/c8252a1073789/page.htm" target="_blank">Ze Xiong</a> at the <a href="https://xiong-group.com/" target="_blank">WiSe Lab</a>, ShanghaiTech University.
   </p>
+  <p>
+  My pronouns are He/Him/His.
+  </p>
+
 
 portrait_url: /assets/images/photos/wsy_1.jpg
 # portrait_caption: >-
@@ -45,9 +49,9 @@ education:
 experience:
   - company: "Rutgers University"
     position: "Advised by Prof. <a href='https://yongfeng.me/' target='_blank'>Yongfeng Zhang</a>."
-    date: "Jun. 2025 - Present"
+    date: "Jun. 2025 - Sept. 2025"
     logo: "/assets/images/badges/rutgers.png"
-    brief: "Enhanced data efficiency and steerability in LLM preference alignment."
+    brief: "Enhanced steerability in LLM preference alignment."
 
   - company: "University of Illinois Urbana-Champaign(UIUC)"
     position: "Advised by Prof. <a href='https://blender.cs.illinois.edu/hengji.html' target='_blank'>Heng Ji</a> and mentor <a href='https://xiusic.github.io/' target='_blank'>Xiusi Chen</a>."
@@ -57,7 +61,7 @@ experience:
 
   - company: "ShanghaiTech Univeristy"
     position: "Advised by Prof. <a href='https://bme.shanghaitech.edu.cn/bme_en/2021/0326/c8252a1073789/page.htm' target='_blank'>Ze Xiong</a>."
-    date: ""
+    date: "2024 - Present"
     logo: "/assets/images/badges/shanghaitech.jpg"
     brief: "Designed, modeled, and coded various virtual environments."
 
