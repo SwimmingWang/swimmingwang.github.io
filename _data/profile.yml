@@ -47,6 +47,12 @@ education:
     date: Aug. 2024 - May. 2025
 
 experience:
+  - company: "Xiaohongshu"
+    position: "Algorithm Engineer Intern"
+    date: "Jan. 2025 - Present"
+    logo: "/assets/images/badges/xiaohongshu.png"
+    brief: "Enhanced the performance of Ask and Search System."
+
   - company: "Rutgers University"
     position: "Advised by Prof. <a href='https://yongfeng.me/' target='_blank'>Yongfeng Zhang</a>."
     date: "Jun. 2025 - Sept. 2025"
