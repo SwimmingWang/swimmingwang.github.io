@@ -36,13 +36,12 @@ plugins:
 # timezone: Asia/Shanghai
 
 collections:
-  - publications
-  - news
-  - showcase
-
-hidden:
-  - output: true
-  - permalink: /hidden-blog/:title/
+  publications:
+  news:
+  showcase:
+  hidden:
+    output: true
+    permalink: /hidden-blog/:title/
 
 last-modified-at:
   use_git: false

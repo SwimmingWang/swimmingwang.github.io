@@ -212,7 +212,7 @@ permalink: /hidden-blog/
   {% if filtered == empty or filtered.size == 0 %}
     <div class="hb-quiet">Nothing here yet.</div>
   {% else %}
-    {% assign sorted = filtered | sort: "last_modified_at" | reverse %}
+    {% assign sorted = filtered | sort: "date" | reverse %}
     <div id="hb-list">
       {% for post in sorted %}
         {% assign clean_cats = "" | split: "" %}
