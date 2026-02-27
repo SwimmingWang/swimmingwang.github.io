@@ -1,0 +1,24 @@
+{% if page.external_embed or page.external_link %}
+<div class="hb-external">
+  <div class="hb-external-title">
+    {% if page.external_label %} {{ page.external_label }}{% endif %}
+  </div>
+
+  {% if page.external_embed %}
+    <iframe
+      src="{{ page.external_embed }}"
+      loading="lazy"
+      style="width:100%;min-height:420px;border:none;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.04);"
+    ></iframe>
+  {% endif %}
+
+  {% if page.external_link %}
+    <div class="hb-external-note">
+      <a href="{{ page.external_link }}" target="_blank" rel="noopener">
+        {{ page.external_link_text | default: page.external_link }}
+      </a>
+    </div>
+  {% endif %}
+</div>
+{% endif %}
+

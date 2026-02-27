@@ -19,6 +19,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 markdown: kramdown
 plugins:
   - jekyll-email-protect
+  - jekyll-last-modified-at
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -38,3 +39,10 @@ collections:
   - publications
   - news
   - showcase
+
+hidden:
+  - output: true
+  - permalink: /hidden-blog/:title/
+
+last-modified-at:
+  use_git: false

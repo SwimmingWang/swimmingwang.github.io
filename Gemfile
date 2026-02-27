@@ -20,6 +20,7 @@ gem "jekyll", "~> 3.9"
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-email-protect"
+  gem "jekyll-last-modified-at"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -30,3 +31,5 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "webrick", "~> 1.7"
 gem "kramdown-parser-gfm"
+gem "base64"
+gem "bigdecimal"

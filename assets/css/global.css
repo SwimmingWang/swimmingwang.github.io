@@ -356,3 +356,111 @@ h6.border-bottom {
         margin-bottom: 1rem !important;
     }
 }
+
+/* -------- Blog / page layout -------- */
+.page-wrap {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.post-card {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.post-header {
+    margin-bottom: 1.75rem;
+}
+
+.post-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+    margin-bottom: 0.35rem;
+}
+
+.post-body {
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.post-body p {
+    margin-bottom: 1.1rem;
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.post-body h1 {
+    font-size: 1.8rem;
+}
+
+.post-body h2 {
+    font-size: 1.5rem;
+}
+
+.post-body h3 {
+    font-size: 1.25rem;
+}
+
+.post-body ul,
+.post-body ol {
+    padding-left: 1.4rem;
+    margin-bottom: 1.1rem;
+}
+
+.post-body blockquote {
+    border-left: 3px solid rgba(0, 0, 0, 0.08);
+    padding-left: 1rem;
+    color: rgba(0, 0, 0, 0.7);
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.post-body code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9em;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.15em 0.35em;
+    border-radius: 3px;
+}
+
+.post-body pre code {
+    display: block;
+    padding: 0.9rem 1rem;
+    border-radius: 6px;
+}
+
+.post-body pre {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .page-wrap {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .post-card {
+        max-width: 100%;
+    }
+
+    .post-title {
+        font-size: 1.7rem;
+    }
+}
