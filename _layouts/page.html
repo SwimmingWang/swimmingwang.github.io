@@ -2,24 +2,9 @@
 layout: default
 ---
 
-{% comment %} GitHub 编辑链接配置 {% endcomment %}
-{% assign github_user = "SwimmingWang" %}
-{% assign github_repo = "swimmingwang.github.io" %}
-{% assign github_branch = "main" %}
-{% if page.path %}
-  {% assign edit_url = "https://github.com/" | append: github_user | append: "/" | append: github_repo | append: "/edit/" | append: github_branch | append: "/" | append: page.path %}
-{% endif %}
-
 <div class="page-wrap">
   <article class="post-card">
     <header class="post-header">
-      {% if edit_url %}
-      <div class="post-edit-link">
-        <a href="{{ edit_url }}" target="_blank" title="在 GitHub 上编辑">
-          <i class="fas fa-edit"></i> 编辑
-        </a>
-      </div>
-      {% endif %}
       {% assign display_date = page.last_modified_at | default: page.date %}
       {% if display_date %}
       <div class="post-meta">
