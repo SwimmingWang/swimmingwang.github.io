@@ -174,8 +174,55 @@ date: 2025-02-28 09:00:00 +0800
         </div>
 
         <div class="review-box">
-          百合番。
+        玩派的时候看到导线管的新联动皮肤觉得风灵很好看，就想着找个高达看看，发现op居然是
+        <span class="video-toggle" onclick="toggleBiliVideo()">祝福</span>
+        ，好像只有op是正片啊。
         </div>
+
+        <div id="bili-video" class="bilibili-player" style="display: none;">
+        <iframe
+            src="https://player.bilibili.com/player.html?bvid=BV18N4y1P7av&page=1"
+            scrolling="no"
+            border="0"
+            frameborder="no"
+            framespacing="0"
+            allowfullscreen="true">
+        </iframe>
+        </div>
+
+        <style>
+        .video-toggle {
+        color: #ff4d6d;
+        cursor: pointer;
+        font-weight: 600;
+        }
+        .video-toggle:hover {
+        text-decoration: underline;
+        }
+
+        .bilibili-player {
+        margin-top: 12px;
+        border-radius: 12px;
+        overflow: hidden;
+        max-width: 720px;
+        }
+        .bilibili-player iframe {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        display: block;
+        }
+        </style>
+
+        <script>
+        function toggleBiliVideo() {
+        const video = document.getElementById("bili-video");
+        if (video.style.display === "none") {
+            video.style.display = "block";
+        } else {
+            video.style.display = "none";
+        }
+        }
+        </script>
       </div>
     </div>
 
@@ -197,6 +244,23 @@ date: 2025-02-28 09:00:00 +0800
         </div>
       </div>
     </div>
+    <div class="anime-card">
+      <div class="anime-poster">
+        <img src="https://lain.bgm.tv/r/400/pic/cover/l/38/44/398951_973Z3.jpg" alt="更衣人偶第二季">
+      </div>
 
+      <div class="anime-content">
+        <h2 class="anime-title">更衣人偶第二季</h2>
+
+        <div class="anime-meta">
+          <span class="meta-tag">观看时间：2026-3-8</span>
+          <span class="meta-tag rating">评分：10 / 10</span>
+        </div>
+
+        <div class="review-box">
+          喜多川我老婆，节奏不快看的很舒服。
+        </div>
+      </div>
+    </div>
   </div>
 </div>
