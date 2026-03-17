@@ -1,0 +1,54 @@
+<script>
+(function() {
+  var searchInput = document.getElementById('hb-search');
+  var chips = document.querySelectorAll('#hb-chips .hb-chip');
+  var items = document.querySelectorAll('#hb-list .hb-item');
+
+  if (!searchInput || chips.length === 0) return;
+
+  var activeCat = 'all';
+
+  function normalize(str) {
+    return (str || '').toLowerCase();
+  }
+
+  function applyFilter() {
+    var q = normalize(searchInput.value.trim());
+    if (items.length === 0) return;
+    items.forEach(function(item) {
+      var cats = normalize(item.getAttribute('data-categories') || '');
+      var title = normalize(item.getAttribute('data-title') || '');
+      var text = normalize(item.getAttribute('data-text') || '');
+      var searchOnly = (item.getAttribute('data-search-only') || 'false') === 'true';
+
+      if (searchOnly && !q) {
+        item.style.display = 'none';
+        return;
+      }
+
+      var matchCat = (activeCat === 'all') || cats.split(/\s+/).indexOf(activeCat) !== -1;
+      var matchText = !q || (title.indexOf(q) !== -1 || text.indexOf(q) !== -1);
+
+      if (matchCat && matchText) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      activeCat = normalize(chip.getAttribute('data-cat'));
+      chips.forEach(function(c) { c.classList.remove('hb-chip-active'); });
+      chip.classList.add('hb-chip-active');
+      applyFilter();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilter);
+
+  applyFilter();
+})();
+</script>
+

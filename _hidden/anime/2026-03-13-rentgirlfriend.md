@@ -1,0 +1,13 @@
+---
+layout: page
+title: 租借女友（1 2 3）
+date: 2026-03-13 00:00:00 +0800
+categories: [anime, review]
+search_only: true
+hb_kind: anime_review
+poster: https://lain.bgm.tv/pic/cover/l/83/14/401783_x6496.jpg
+poster_alt: 租借女友 海报
+rating:
+---
+
+看的胃疼，真有人能写出来这种故事的，第四季都没啥看的想法了。这男主这么拉完了还有一堆女的喜欢，真是小宅男的最终幻想。

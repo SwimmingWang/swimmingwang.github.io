@@ -2,25 +2,50 @@
 layout: default
 ---
 
-<div class="page-wrap">
-  <article class="post-card">
-    <header class="post-header">
+{% if page.collection == 'hidden' %}
+  {% include hidden-blog/hb-styles.html %}
+
+  {% assign list_url = '/hidden-blog/' | relative_url %}
+
+  {% include hidden-blog/hb-music.html %}
+  {% include hidden-blog/hb-post-nav.html %}
+  {% include hidden-blog/hb-post-nav-script.html %}
+
+  <div class="hb-wrap" data-list-url="{{ list_url }}">
+    <div class="hb-post-body">
       {% assign display_date = page.last_modified_at | default: page.date %}
       {% if display_date %}
-      <div class="post-meta">
-        {{ display_date | date: "%Y-%m-%d" }}
-      </div>
+        <div class="hb-post-meta">{{ display_date | date: "%Y-%m-%d" }}</div>
       {% endif %}
       {% if page.title %}
-      <h1 class="post-title">
-        {{ page.title }}
-      </h1>
+        <div class="hb-post-title">{{ page.title }}</div>
       {% endif %}
-    </header>
-
-    <div class="post-body">
-      {{ content }}
+      <div class="hb-post-content">
+        {{ content }}
+      </div>
     </div>
-  </article>
-</div>
+  </div>
+{% else %}
+  <div class="page-wrap">
+    <article class="post-card">
+      <header class="post-header">
+        {% assign display_date = page.last_modified_at | default: page.date %}
+        {% if display_date %}
+        <div class="post-meta">
+          {{ display_date | date: "%Y-%m-%d" }}
+        </div>
+        {% endif %}
+        {% if page.title %}
+        <h1 class="post-title">
+          {{ page.title }}
+        </h1>
+        {% endif %}
+      </header>
+
+      <div class="post-body">
+        {{ content }}
+      </div>
+    </article>
+  </div>
+{% endif %}
 

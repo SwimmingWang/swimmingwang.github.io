@@ -1,0 +1,71 @@
+{% assign filtered = site.hidden | default: site.pages %}
+{% assign filtered = filtered | where_exp: "post", "post.hb_kind != 'anime_review'" %}
+
+{% comment %}
+  Collect all categories that appear in filtered posts
+{% endcomment %}
+{% assign all_categories = "" | split: "" %}
+{% for post in filtered %}
+  {% assign clean_cats = "" | split: "" %}
+  {% for cat in post.categories %}
+    {% unless cat == 'b' %}
+      {% assign clean_cats = clean_cats | push: cat %}
+    {% endunless %}
+  {% endfor %}
+  {% for cat in clean_cats %}
+    {% unless all_categories contains cat %}
+      {% assign all_categories = all_categories | push: cat %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+
+<div class="hb-filter-bar">
+  <input
+    id="hb-search"
+    class="hb-search"
+    type="search"
+    placeholder="Searching for title or content...">
+  <div class="hb-chips" id="hb-chips">
+    <button class="hb-chip hb-chip-active" data-cat="all">ALL</button>
+    {% for cat in all_categories %}
+      <button class="hb-chip" data-cat="{{ cat | downcase | escape_once }}">{{ cat }}</button>
+    {% endfor %}
+  </div>
+</div>
+
+{% if filtered == empty or filtered.size == 0 %}
+  <div class="hb-quiet">Nothing here yet.</div>
+{% else %}
+  {% assign sorted = filtered | sort: "date" | reverse %}
+  <div id="hb-list" class="hb-list">
+    {% for post in sorted %}
+      {% assign clean_cats = "" | split: "" %}
+      {% for cat in post.categories %}
+        {% unless cat == 'b' %}
+          {% assign clean_cats = clean_cats | push: cat %}
+        {% endunless %}
+      {% endfor %}
+      {% assign search_only_flag = post.search_only | default: false %}
+      <div class="hb-item"
+           data-categories="{{ clean_cats | join: ' ' | downcase | escape_once }}"
+           data-title="{{ post.title | downcase | escape_once }}"
+           data-text="{{ post.content | strip_html | strip_newlines | downcase | escape_once }}"
+           data-search-only="{{ search_only_flag }}">
+        <a class="hb-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% assign display_date = post.last_modified_at | default: post.date %}
+        <div class="hb-meta">
+          {{ display_date | date: "%Y-%m-%d" }}
+          {% if clean_cats and clean_cats.size > 0 %}
+            ·
+            {% for cat in clean_cats %}
+              <span>{{ cat }}</span>{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="hb-excerpt">
+          {{ post.content | strip_html | strip_newlines | truncate: 160 }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

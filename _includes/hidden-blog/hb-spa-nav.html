@@ -1,0 +1,88 @@
+<script>
+(function(){
+  var listContainer = document.getElementById('hb-list-container');
+  var postView = document.getElementById('hb-post-view');
+  var wrap = document.querySelector('.hb-wrap');
+  if (!listContainer || !postView || !wrap) return;
+
+  var listUrl = wrap.getAttribute('data-list-url') || '/hidden-blog/';
+  if (!/\/$/.test(listUrl)) listUrl += '/';
+  var cache = {};
+  var postFab = document.getElementById('hb-post-search-fab');
+  var postDrawer = document.getElementById('hb-post-search-drawer');
+
+  function setPostNavVisible(visible) {
+    if (postFab) postFab.style.display = visible ? '' : 'none';
+    if (postDrawer) {
+      if (!visible) postDrawer.classList.remove('is-open');
+      postDrawer.style.display = visible ? '' : 'none';
+    }
+  }
+
+  function showList() {
+    listContainer.removeAttribute('hidden');
+    listContainer.setAttribute('aria-hidden', 'false');
+    postView.setAttribute('hidden', '');
+    postView.setAttribute('aria-hidden', 'true');
+    setPostNavVisible(false);
+  }
+
+  function showPost(html) {
+    listContainer.setAttribute('hidden', '');
+    listContainer.setAttribute('aria-hidden', 'true');
+    postView.innerHTML = html;
+    postView.removeAttribute('hidden');
+    postView.setAttribute('aria-hidden', 'false');
+    setPostNavVisible(true);
+  }
+
+  function loadPost(href, push) {
+    if (cache[href]) {
+      showPost(cache[href]);
+      if (push !== false) history.pushState({ postUrl: href }, '', href);
+      return;
+    }
+    fetch(href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        var body = doc.querySelector('.hb-post-body');
+        var backHtml = '<div class="hb-quiet"><a href="' + listUrl + '" class="hb-back-to-list">← 返回列表</a></div>';
+        var content = (body ? body.outerHTML : '') + backHtml;
+        cache[href] = content;
+        showPost(content);
+        if (push !== false) history.pushState({ postUrl: href }, '', href);
+      })
+      .catch(function() { window.location.href = href; });
+  }
+
+  document.body.addEventListener('click', function(e) {
+    var link = e.target.closest('a.hb-title');
+    if (link && link.href && link.href.indexOf(window.location.origin) === 0 && link.href.indexOf('/hidden-blog/') !== -1) {
+      e.preventDefault();
+      loadPost(link.href);
+      return;
+    }
+    var back = e.target.closest('a.hb-back-to-list');
+    if (back) {
+      e.preventDefault();
+      showList();
+      history.pushState({ index: true }, '', listUrl);
+      return;
+    }
+  });
+
+  window.addEventListener('popstate', function(e) {
+    var state = e.state;
+    if (state && state.postUrl) {
+      loadPost(state.postUrl, false);
+    } else {
+      showList();
+    }
+  });
+
+  // Initial state: list view
+  setPostNavVisible(false);
+})();
+</script>

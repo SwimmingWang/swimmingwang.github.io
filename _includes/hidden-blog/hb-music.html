@@ -1,0 +1,81 @@
+<button class="hb-music-fab" id="hb-music-fab" type="button" aria-expanded="false" aria-controls="hb-music-drawer">
+  <span aria-hidden="true">♫</span> <span>Music</span>
+</button>
+
+<div class="hb-music-drawer" id="hb-music-drawer" role="dialog" aria-modal="false" aria-label="音乐播放器">
+<div class="hb-music-head">
+  <span>Music</span>
+  <div class="hb-track-indicator" id="hb-track-indicator">
+    <span class="hb-track-label" id="hb-track-label">1 / 3</span>
+  </div>
+  <!-- <div class="hb-music-head-left">
+    <svg class="hb-music-head-icon" viewBox="0 0 16 16" fill="none"
+      stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M9 3v7.5a2.5 2.5 0 1 1-1-2V5.5L5 6.5V4l4-1z"/>
+    </svg>
+    
+  </div> -->
+  <button class="hb-music-close" id="hb-music-close" type="button" aria-label="关闭">×</button>
+</div>
+
+<div class="hb-music-body">
+
+  <!-- 曲目指示器 -->
+
+  <!-- iframe 容器，同一时间只显示一个 -->
+  <div class="hb-player-wrap" id="hb-player-wrap">
+    <iframe data-src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=563330183&songtype=0"
+      frameborder="no" allow="autoplay"></iframe>
+  </div>
+
+  <!-- 上一首 / 下一首 -->
+  <div class="hb-nav-row">
+    <button class="hb-nav-btn" id="hb-prev" type="button">‹ 上一首</button>
+    <button class="hb-nav-btn" id="hb-next" type="button">下一首 ›</button>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+  (function(){
+    var fab = document.getElementById('hb-music-fab');
+    var drawer = document.getElementById('hb-music-drawer');
+    var closeBtn = document.getElementById('hb-music-close');
+    if (!fab || !drawer || !closeBtn) return;
+  
+    function openDrawer() { drawer.classList.add('is-open'); fab.setAttribute('aria-expanded','true'); }
+    function closeDrawer() { drawer.classList.remove('is-open'); fab.setAttribute('aria-expanded','false'); }
+    fab.addEventListener('click', function(){ drawer.classList.contains('is-open') ? closeDrawer() : openDrawer(); });
+    closeBtn.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDrawer(); });
+  
+    // 顺序播放逻辑
+    var frames = Array.from(document.querySelectorAll('#hb-player-wrap iframe'));
+    var label = document.getElementById('hb-track-label');
+    var current = 0;
+  
+    function showTrack(idx) {
+      frames.forEach(function(f, i) {
+        if (i === idx) {
+          if (!f.src) f.src = f.getAttribute('data-src'); // 懒加载
+          f.classList.add('active');
+        } else {
+          f.classList.remove('active');
+        }
+      });
+      label.textContent = (idx + 1) + ' / ' + frames.length;
+      current = idx;
+    }
+  
+    document.getElementById('hb-prev').addEventListener('click', function(){
+      showTrack((current - 1 + frames.length) % frames.length);
+    });
+    document.getElementById('hb-next').addEventListener('click', function(){
+      showTrack((current + 1) % frames.length);
+    });
+  
+    showTrack(0); // 默认加载第一首
+  })();
+  </script>

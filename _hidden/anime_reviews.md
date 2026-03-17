@@ -77,6 +77,38 @@ date: 2025-02-28 09:00:00 +0800
   margin-bottom: 0.9rem;
 }
 
+.anime-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 0.9rem 0;
+}
+
+.anime-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.34rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  background: #eef1ff;
+  color: #3b4cca;
+  text-decoration: none;
+  border: 1px solid rgba(59, 76, 202, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.anime-link-btn:hover {
+  background: #e7ebff;
+  box-shadow: 0 8px 18px rgba(59, 76, 202, 0.12);
+  transform: translateY(-1px);
+}
+
+.anime-link-btn:active {
+  transform: translateY(0px);
+  box-shadow: none;
+}
+
 .meta-tag {
   display: inline-block;
   padding: 0.28rem 0.72rem;
@@ -160,107 +192,51 @@ date: 2025-02-28 09:00:00 +0800
   <div class="section-title">已观看番剧列表</div>
 
   <div class="anime-list">
-    <div class="anime-card">
-      <div class="anime-poster">
-        <img src="https://lain.bgm.tv/pic/cover/l/f1/fd/349441_uND33.jpg" alt="水星的魔女 海报">
-      </div>
-
-      <div class="anime-content">
-        <h2 class="anime-title">水星的魔女</h2>
-
-        <div class="anime-meta">
-          <span class="meta-tag">观看时间：2026-03-17</span>
-          <span class="meta-tag rating">评分：7 / 10</span>
+    {% assign anime_reviews = site.hidden | where: "hb_kind", "anime_review" | sort: "date" | reverse %}
+    {% for review in anime_reviews %}
+      {% assign watched_date = review.date | date: "%Y-%m-%d" %}
+      <div class="anime-card">
+        <div class="anime-poster">
+          <img src="{{ review.poster | escape_once }}" alt="{{ review.poster_alt | default: review.title | escape_once }}">
         </div>
 
-        <div class="review-box">
-        玩派的时候看到导线管的新联动皮肤觉得风灵很好看，就想着找个高达看看，发现op居然是
-        <span class="video-toggle" onclick="toggleBiliVideo()">祝福</span>
-        ，好像只有op是正片啊。
-        </div>
+        <div class="anime-content">
+          <h2 class="anime-title">{{ review.title }}</h2>
 
-        <div id="bili-video" class="bilibili-player" style="display: none;">
-        <iframe
-            src="https://player.bilibili.com/player.html?bvid=BV18N4y1P7av&page=1"
-            scrolling="no"
-            border="0"
-            frameborder="no"
-            framespacing="0"
-            allowfullscreen="true">
-        </iframe>
-        </div>
+          {% assign anime_links = review.anime_links %}
+          {% assign single_url = review.anime_url | default: review.link %}
+          {% if anime_links and anime_links.size > 0 %}
+            <div class="anime-actions">
+              {% for it in anime_links %}
+                {% assign url = it.url | default: it %}
+                {% assign label = it.label | default: '番剧链接' %}
+                {% if url %}
+                  <a class="anime-link-btn" href="{{ url | escape_once }}" target="_blank" rel="noopener noreferrer">
+                    {{ label | escape_once }} ↗
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% elsif single_url %}
+            <div class="anime-actions">
+              <a class="anime-link-btn" href="{{ single_url | escape_once }}" target="_blank" rel="noopener noreferrer">
+                番剧链接 ↗
+              </a>
+            </div>
+          {% endif %}
 
-        <style>
-        .video-toggle {
-        color: #ff4d6d;
-        cursor: pointer;
-        font-weight: 600;
-        }
-        .video-toggle:hover {
-        text-decoration: underline;
-        }
+          <div class="anime-meta">
+            <span class="meta-tag">观看时间：{{ watched_date }}</span>
+            {% if review.rating %}
+              <span class="meta-tag rating">评分：{{ review.rating }} / 10</span>
+            {% endif %}
+          </div>
 
-        .bilibili-player {
-        margin-top: 12px;
-        border-radius: 12px;
-        overflow: hidden;
-        max-width: 720px;
-        }
-        .bilibili-player iframe {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        display: block;
-        }
-        </style>
-
-        <script>
-        function toggleBiliVideo() {
-        const video = document.getElementById("bili-video");
-        if (video.style.display === "none") {
-            video.style.display = "block";
-        } else {
-            video.style.display = "none";
-        }
-        }
-        </script>
-      </div>
-    </div>
-
-    <div class="anime-card">
-      <div class="anime-poster">
-        <img src="https://lain.bgm.tv/pic/cover/l/83/14/401783_x6496.jpg" alt="租借女友 海报">
-      </div>
-
-      <div class="anime-content">
-        <h2 class="anime-title">租借女友（1 2 3）</h2>
-
-        <div class="anime-meta">
-          <span class="meta-tag">观看时间：2026-03-13</span>
-          <span class="meta-tag rating">评分：* / 10</span>
-        </div>
-
-        <div class="review-box">
-          看的胃疼，真有人能写出来这种故事的，第四季都没啥看的想法了。这男主这么拉完了还有一堆女的喜欢，真是小宅男的最终幻想。
+          <div class="review-box">
+            {{ review.content | markdownify }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="anime-card">
-      <div class="anime-poster">
-        <img src="https://lain.bgm.tv/r/400/pic/cover/l/38/44/398951_973Z3.jpg" alt="更衣人偶第二季">
-      </div>
-
-      <div class="anime-content">
-        <h2 class="anime-title">更衣人偶第二季</h2>
-
-        <div class="anime-meta">
-          <span class="meta-tag">观看时间：2026-3-8</span>
-          <span class="meta-tag rating">评分：10 / 10</span>
-        </div>
-
-        <div class="review-box">
-          喜多川我老婆，节奏不快看的很舒服。
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
