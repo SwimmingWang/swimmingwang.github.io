@@ -12,6 +12,15 @@ permalink: /hidden-blog/
   padding: 0 1.25rem;
   line-height: 1.85;
   letter-spacing: 0.01em;
+  box-sizing: border-box;
+}
+.hb-wrap, .hb-wrap * { box-sizing: border-box; }
+.hb-wrap a { color: inherit; }
+.hb-wrap a:hover { text-decoration: none; }
+
+.hb-wrap button,
+.hb-wrap input{
+  font: inherit;
 }
 
 .hb-header{
@@ -44,10 +53,17 @@ permalink: /hidden-blog/
 .hb-search{
   flex: 1 1 180px;
   max-width: 280px;
+  width: 100%;
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,0.12);
-  padding: 0.4rem 0.9rem;
+  padding: 0.45rem 0.9rem;
   font-size: 0.9rem;
+  background: #fff;
+  outline: none;
+}
+.hb-search:focus{
+  border-color: rgba(0,0,0,0.28);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
 }
 
 .hb-chips{
@@ -57,6 +73,8 @@ permalink: /hidden-blog/
 }
 
 .hb-chip{
+  appearance: none;
+  -webkit-appearance: none;
   border-radius: 999px;
   padding: 0.25rem 0.7rem;
   font-size: 0.8rem;
@@ -64,6 +82,13 @@ permalink: /hidden-blog/
   cursor: pointer;
   opacity: 0.75;
   background: #fff;
+  line-height: 1.2;
+  white-space: nowrap;
+  user-select: none;
+}
+.hb-chip:focus{ outline: none; }
+.hb-chip:focus-visible{
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.10);
 }
 
 .hb-chip-active{
@@ -71,6 +96,11 @@ permalink: /hidden-blog/
   color: #fff;
   border-color: #000;
   opacity: 1;
+}
+
+.hb-list{
+  display: flex;
+  flex-direction: column;
 }
 
 .hb-year{
@@ -96,6 +126,9 @@ permalink: /hidden-blog/
   font-weight: 600;
   text-decoration: none;
   color: inherit;
+  display: inline-block;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hb-meta{
@@ -108,6 +141,8 @@ permalink: /hidden-blog/
   margin-top: 0.75rem;
   font-size: 0.98rem;
   opacity: 0.92;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hb-quiet{
@@ -154,15 +189,28 @@ permalink: /hidden-blog/
     color: inherit;
     border-color: rgba(255,255,255,0.22);
   }
+  .hb-search:focus{
+    border-color: rgba(255,255,255,0.35);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.10);
+  }
   .hb-chip{
     background: transparent;
     border-color: rgba(255,255,255,0.22);
+  }
+  .hb-chip:focus-visible{
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.12);
   }
 }
 
 @media (max-width: 600px){
   .hb-wrap{
     margin-top: 2.5rem;
+  }
+  .hb-filter-bar{
+    gap: 0.6rem;
+  }
+  .hb-search{
+    max-width: 100%;
   }
 }
 </style>
@@ -204,7 +252,7 @@ permalink: /hidden-blog/
     <div class="hb-chips" id="hb-chips">
       <button class="hb-chip hb-chip-active" data-cat="all">ALL</button>
       {% for cat in all_categories %}
-        <button class="hb-chip" data-cat="{{ cat | downcase }}">{{ cat }}</button>
+        <button class="hb-chip" data-cat="{{ cat | downcase | escape_once }}">{{ cat }}</button>
       {% endfor %}
     </div>
   </div>
@@ -213,7 +261,7 @@ permalink: /hidden-blog/
     <div class="hb-quiet">Nothing here yet.</div>
   {% else %}
     {% assign sorted = filtered | sort: "date" | reverse %}
-    <div id="hb-list">
+    <div id="hb-list" class="hb-list">
       {% for post in sorted %}
         {% assign clean_cats = "" | split: "" %}
         {% for cat in post.categories %}
@@ -223,9 +271,9 @@ permalink: /hidden-blog/
         {% endfor %}
         {% assign search_only_flag = post.search_only | default: false %}
         <div class="hb-item"
-             data-categories="{{ clean_cats | join: ' ' | downcase }}"
-             data-title="{{ post.title | downcase }}"
-             data-text="{{ post.content | strip_html | strip_newlines | downcase }}"
+             data-categories="{{ clean_cats | join: ' ' | downcase | escape_once }}"
+             data-title="{{ post.title | downcase | escape_once }}"
+             data-text="{{ post.content | strip_html | strip_newlines | downcase | escape_once }}"
              data-search-only="{{ search_only_flag }}">
           <a class="hb-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
           {% assign display_date = post.last_modified_at | default: post.date %}
