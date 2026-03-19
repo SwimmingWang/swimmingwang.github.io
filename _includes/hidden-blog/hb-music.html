@@ -26,6 +26,26 @@
   <div class="hb-player-wrap" id="hb-player-wrap">
     <iframe data-src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=563330183&songtype=0"
       frameborder="no" allow="autoplay"></iframe>
+    <iframe data-src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=439583203&songtype=0"
+      frameborder="no" allow="autoplay"></iframe>
+    <iframe data-src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=318731687&songtype=0"
+      frameborder="no" allow="autoplay"></iframe>
+      
+
+    <!-- B站曲目：将 bvid 替换为实际 BV 号，可添加多个-->
+    <!-- <iframe
+      data-src="https://player.bilibili.com/player.html?bvid=BV15sqzBFE8K&page=1&autoplay=0&danmaku=0"
+      data-type="bilibili"
+      frameborder="0" scrolling="no" allow="autoplay"></iframe> -->
+
+    <!-- B站纯音频覆盖层（pointer-events:none，悬停可穿透到控制栏） -->
+    <!-- <div class="hb-bili-overlay" id="hb-bili-overlay" aria-hidden="true">
+      <div class="hb-bili-wave">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="hb-bili-label">B 站 · 纯音频</div>
+      <div class="hb-bili-hint">悬停显示播放控制</div>
+    </div> -->
   </div>
 
   <!-- 上一首 / 下一首 -->
@@ -65,6 +85,9 @@
           f.classList.remove('active');
         }
       });
+      // 切换 B站纯音频模式
+      var isBilibili = frames[idx].getAttribute('data-type') === 'bilibili';
+      document.getElementById('hb-player-wrap').classList.toggle('bilibili-mode', isBilibili);
       label.textContent = (idx + 1) + ' / ' + frames.length;
       current = idx;
     }
