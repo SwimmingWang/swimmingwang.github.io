@@ -1,398 +1,89 @@
 <style>
-/* ---- Minimal philosophical notes style (scoped via .hb-wrap) ---- */
-.hb-wrap{
-  max-width: 720px;
-  margin: 3.5rem auto;
-  padding: 0 1.25rem;
-  line-height: 1.85;
-  letter-spacing: 0.01em;
-}
-
-.hb-header{
-  margin-bottom: 1.5rem;
-  opacity: 0.95;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-.hb-header-right{
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-.hb-header-right .hb-search-fab,
-.hb-header-right .hb-music-fab{
-  position: static;
-  margin: 0;
-}
-
-.hb-header .hb-mark{
-  font-size: 1.6rem;
-  letter-spacing: 0.12em;
-  font-weight: 600;
-  opacity: 0.75;
-}
-
-.hb-header .hb-sub{
-  margin-top: 0.9rem;
-  font-size: 0.95rem;
-  opacity: 0.65;
-}
-
-.hb-header .hb-mark-link{
-  font-size: 1.6rem;
-  letter-spacing: 0.12em;
-  font-weight: 600;
-  opacity: 0.75;
-  color: inherit;
-  text-decoration: none;
-}
-.hb-header .hb-mark-link:hover{ opacity: 0.9; }
-
-/* 单篇正文页 */
-.hb-post-body{ margin-top: 0.5rem; }
-.hb-post-meta{
-  font-size: 0.9rem;
-  opacity: 0.6;
-  margin-bottom: 0.25rem;
-}
-.hb-post-title{
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  margin-bottom: 1.25rem;
-}
-.hb-post-content{
-  font-size: 1rem;
-  opacity: 0.92;
-}
-.hb-post-content :first-child{ margin-top: 0; }
-.hb-back-link{
-  display: block;
-  padding: 0.6rem 0.85rem;
-  color: rgba(0,0,0,0.72);
-  text-decoration: none;
-  font-size: 0.95rem;
-  border-radius: 8px;
-}
-.hb-back-link:hover{ background: rgba(15,23,42,0.04); }
-
-/* 搜索/筛选：右上角按钮 + 抽屉 */
-.hb-search-fab{
-  position: fixed;
-  left: 18px;
-  bottom: 18px;
-  z-index: 9999;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.82);
-  box-shadow: 0 10px 28px rgba(15,23,42,0.12);
-  cursor: pointer;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  color: rgba(0,0,0,0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
-}
-.hb-search-fab:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(15,23,42,0.14); }
-.hb-search-fab:focus{ outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.18), 0 14px 34px rgba(15,23,42,0.14); }
-
-.hb-search-drawer{
-  position: fixed;
-  right: 18px;
-  top: 56px;
-  left: auto;
-  bottom: auto;
-  z-index: 9999;
-  width: min(360px, calc(100vw - 36px));
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 18px 55px rgba(15,23,42,0.18);
-  overflow: hidden;
-  transform: translateY(-10px);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .18s ease, opacity .18s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.hb-search-drawer.is-open{
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.hb-search-head{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 0.85rem;
-  border-bottom: 1px solid rgba(15,23,42,0.06);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.62);
-}
-.hb-search-close{
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 1.15rem;
-  line-height: 1;
-  opacity: 0.6;
-  padding: 0.1rem 0.35rem;
-  border-radius: 8px;
-}
-.hb-search-close:hover{ opacity: 0.9; background: rgba(15,23,42,0.04); }
-
-/* filter bar（放在抽屉内） */
-.hb-filter-bar{
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding: 0.75rem 0.85rem 0.9rem;
-}
-
-.hb-search{
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.12);
-  padding: 0.4rem 0.9rem;
-  font-size: 0.9rem;
-  background: rgba(248,250,252,0.9);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.hb-search::placeholder{
-  color: rgba(148,163,184,0.95);
-}
-
-.hb-search:focus{
-  outline: none;
-  border-color: rgba(37,99,235,0.5);
-  box-shadow: 0 0 0 1px rgba(37,99,235,0.16);
-  background: #fff;
-}
-
-.hb-chips{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.hb-chip{
-  border-radius: 999px;
-  padding: 0.25rem 0.7rem;
-  font-size: 0.8rem;
-  border: 1px solid rgba(0,0,0,0.08);
-  cursor: pointer;
-  opacity: 0.7;
-  background: rgba(255,255,255,0.85);
-  transition: background 0.12s ease, border-color 0.12s ease, opacity 0.12s ease, transform 0.08s ease;
-}
-
-.hb-chip:hover{
-  opacity: 0.95;
-  border-color: rgba(15,23,42,0.12);
-  transform: translateY(-0.5px);
-}
-
-.hb-chip-active{
-  background: #000;
-  color: #fff;
-  border-color: #000;
-  opacity: 1;
-}
-
-.hb-year{
-  margin-top: 1.5rem;
-  margin-bottom: 0.2rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
-.hb-item{
-  padding: 1.1rem 0;
-  border-top: 1px solid rgba(0,0,0,0.08);
-}
-
-.hb-item:first-of-type{
-  border-top: 1px solid rgba(0,0,0,0.08);
-}
-
-.hb-title{
-  font-size: 1.05rem;
-  font-weight: 600;
-  text-decoration: none;
-  color: inherit;
-}
-
-.hb-meta{
-  margin-top: 0.35rem;
-  font-size: 0.85rem;
-  opacity: 0.55;
-}
-
-.hb-excerpt{
-  margin-top: 0.75rem;
-  font-size: 0.98rem;
-  opacity: 0.92;
-}
-
-.hb-quiet{
-  font-size: 0.9rem;
-  opacity: 0.5;
-  margin-top: 2.5rem;
-}
-
-.hb-external{
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-
-.hb-external-title{
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-bottom: 0.75rem;
-}
-
-.hb-external iframe{
-  width: 100%;
-  min-height: 420px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-}
-
-.hb-external-note{
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  opacity: 0.6;
-}
-
-/* 音乐播放器区块 */
-.hb-music{
-  margin-bottom: 1.2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(0,0,0,0.06);
-  background: rgba(255,255,255,0.75);
-  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
-  overflow: hidden;
-}
-
-.hb-music-toggle{
-  width: 100%;
-  padding: 0.55rem 0.9rem;
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  color: rgba(0,0,0,0.62);
-}
-
-.hb-music-toggle:hover{
-  background: rgba(15,23,42,0.02);
-}
-
-.hb-music-toggle:focus{
-  outline: none;
-}
-
-.hb-music-toggle-left{
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.hb-music-body{
-  padding: 10px 12px;          /* 原来如果更大，缩小 */
-  display: grid;
-  gap: 8px;                    /* 两首歌之间更紧凑 */
-}
-
-.hb-music-body iframe{
-  width: 100%;
-  height: 86px;                /* QQ 外链常见 86~110；你想更紧凑就降 */
-  border: 0;
-  border-radius: 10px;         /* 可选：更像卡片 */
-  overflow: hidden;
-}
-
-@media (prefers-color-scheme: dark){
-  .hb-music{
-    background: rgba(15,23,42,0.6);
-    border-color: rgba(148,163,184,0.35);
-  }
-  .hb-music-toggle{ color: rgba(226,232,240,0.9); }
-  .hb-music-body{ border-top-color: rgba(148,163,184,0.3); }
-}
-
-/* Dark mode (best-effort; won't affect other pages) */
-@media (prefers-color-scheme: dark){
-  .hb-item{ border-top: 1px solid rgba(255,255,255,0.12); }
-  .hb-item:first-of-type{ border-top: 1px solid rgba(255,255,255,0.12); }
-  .hb-search{
-    background: transparent;
-    color: inherit;
-    border-color: rgba(255,255,255,0.22);
-  }
-  .hb-chip{
-    background: transparent;
-    border-color: rgba(255,255,255,0.22);
-  }
-  .hb-search-fab{
-    background: rgba(15,23,42,0.72);
-    border-color: rgba(148,163,184,0.35);
-    color: rgba(226,232,240,0.92);
-    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-  }
-  .hb-search-drawer{
-    background: rgba(15,23,42,0.78);
-    border-color: rgba(148,163,184,0.35);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.45);
-  }
-  .hb-search-head{
-    color: rgba(226,232,240,0.85);
-    border-bottom-color: rgba(148,163,184,0.25);
-  }
-  .hb-search-close:hover{ background: rgba(148,163,184,0.12); }
-  .hb-header .hb-mark-link{ color: inherit; }
-  .hb-back-link{ color: rgba(226,232,240,0.9); }
-  .hb-back-link:hover{ background: rgba(148,163,184,0.12); }
-}
-
-@media (max-width: 600px){
+  /* ---- Minimal philosophical notes style (scoped via .hb-wrap) ---- */
   .hb-wrap{
-    margin-top: 2.5rem;
+    max-width: 720px;
+    margin: 3.5rem auto;
+    padding: 0 1.25rem;
+    line-height: 1.85;
+    letter-spacing: 0.01em;
   }
-}
-</style>
-
-<!-- 音乐：右上角按钮 + 抽屉 -->
-<style>
-  .hb-music-fab{
+  
+  .hb-header{
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hb-header-right{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .hb-header-right .hb-search-fab,
+  .hb-header-right .hb-music-fab{
+    position: static;
+    margin: 0;
+  }
+  
+  .hb-header .hb-mark{
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    opacity: 0.75;
+  }
+  
+  .hb-header .hb-sub{
+    margin-top: 0.9rem;
+    font-size: 0.95rem;
+    opacity: 0.65;
+  }
+  
+  .hb-header .hb-mark-link{
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    opacity: 0.75;
+    color: inherit;
+    text-decoration: none;
+  }
+  .hb-header .hb-mark-link:hover{ opacity: 0.9; }
+  
+  /* 单篇正文页 */
+  .hb-post-body{ margin-top: 0.5rem; }
+  .hb-post-meta{
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-bottom: 0.25rem;
+  }
+  .hb-post-title{
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .hb-post-content{
+    font-size: 1rem;
+    opacity: 0.92;
+  }
+  .hb-post-content :first-child{ margin-top: 0; }
+  .hb-back-link{
+    display: block;
+    padding: 0.6rem 0.85rem;
+    color: rgba(0,0,0,0.72);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
+  .hb-back-link:hover{ background: rgba(15,23,42,0.04); }
+  
+  /* 搜索/筛选：右上角按钮 + 抽屉 */
+  .hb-search-fab{
     position: fixed;
-    right: 18px;
+    left: 18px;
     bottom: 18px;
     z-index: 9999;
     display: inline-flex;
@@ -411,34 +102,36 @@
     -webkit-backdrop-filter: blur(8px);
     transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
   }
-  .hb-music-fab:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(15,23,42,0.14); }
-  .hb-music-fab:focus{ outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.18), 0 14px 34px rgba(15,23,42,0.14); }
-
-  .hb-music-drawer{
+  .hb-search-fab:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(15,23,42,0.14); }
+  .hb-search-fab:focus{ outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.18), 0 14px 34px rgba(15,23,42,0.14); }
+  
+  .hb-search-drawer{
     position: fixed;
     right: 18px;
-    bottom: calc(18px + 44px + 10px); /* fab + gap */
+    top: 56px;
+    left: auto;
+    bottom: auto;
     z-index: 9999;
-    width: min(420px, calc(100vw - 36px));
+    width: min(360px, calc(100vw - 36px));
     border-radius: 14px;
     border: 1px solid rgba(0,0,0,0.08);
     background: rgba(255,255,255,0.88);
     box-shadow: 0 18px 55px rgba(15,23,42,0.18);
     overflow: hidden;
-    transform: translateY(10px);
+    transform: translateY(-10px);
     opacity: 0;
     pointer-events: none;
     transition: transform .18s ease, opacity .18s ease;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-  .hb-music-drawer.is-open{
+  .hb-search-drawer.is-open{
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
-
-  .hb-music-head{
+  
+  .hb-search-head{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -449,7 +142,7 @@
     text-transform: uppercase;
     color: rgba(0,0,0,0.62);
   }
-  .hb-music-close{
+  .hb-search-close{
     border: none;
     background: transparent;
     cursor: pointer;
@@ -459,67 +152,431 @@
     padding: 0.1rem 0.35rem;
     border-radius: 8px;
   }
-  .hb-music-close:hover{ opacity: 0.9; background: rgba(15,23,42,0.04); }
-
+  .hb-search-close:hover{ opacity: 0.9; background: rgba(15,23,42,0.04); }
+  
+  /* filter bar（放在抽屉内） */
+  .hb-filter-bar{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.75rem 0.85rem 0.9rem;
+  }
+  
+  .hb-search{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    background: rgba(248,250,252,0.9);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  
+  .hb-search::placeholder{
+    color: rgba(148,163,184,0.95);
+  }
+  
+  .hb-search:focus{
+    outline: none;
+    border-color: rgba(37,99,235,0.5);
+    box-shadow: 0 0 0 1px rgba(37,99,235,0.16);
+    background: #fff;
+  }
+  
+  .hb-chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  
+  .hb-chip{
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0,0,0,0.08);
+    cursor: pointer;
+    opacity: 0.7;
+    background: rgba(255,255,255,0.85);
+    transition: background 0.12s ease, border-color 0.12s ease, opacity 0.12s ease, transform 0.08s ease;
+  }
+  
+  .hb-chip:hover{
+    opacity: 0.95;
+    border-color: rgba(15,23,42,0.12);
+    transform: translateY(-0.5px);
+  }
+  
+  .hb-chip-active{
+    background: #000;
+    color: #fff;
+    border-color: #000;
+    opacity: 1;
+  }
+  
+  .hb-year{
+    margin-top: 1.5rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+  
+  .hb-item{
+    padding: 1.1rem 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  
+  .hb-item:first-of-type{
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  
+  .hb-title{
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .hb-meta{
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    opacity: 0.55;
+  }
+  
+  .hb-excerpt{
+    margin-top: 0.75rem;
+    font-size: 0.98rem;
+    opacity: 0.92;
+  }
+  
+  .hb-quiet{
+    font-size: 0.9rem;
+    opacity: 0.5;
+    margin-top: 2.5rem;
+  }
+  
+  .hb-external{
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  
+  .hb-external-title{
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.75rem;
+  }
+  
+  .hb-external iframe{
+    width: 100%;
+    min-height: 420px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  }
+  
+  .hb-external-note{
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+  
+  /* 音乐播放器区块 */
+  .hb-music{
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.75);
+    box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+    overflow: hidden;
+  }
+  
+  .hb-music-toggle{
+    width: 100%;
+    padding: 0.55rem 0.9rem;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    color: rgba(0,0,0,0.62);
+  }
+  
+  .hb-music-toggle:hover{
+    background: rgba(15,23,42,0.02);
+  }
+  
+  .hb-music-toggle:focus{
+    outline: none;
+  }
+  
+  .hb-music-toggle-left{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .hb-music-body{
+    padding: 10px 12px;          /* 原来如果更大，缩小 */
+    display: grid;
+    gap: 8px;                    /* 两首歌之间更紧凑 */
+  }
+  
+  .hb-music-body iframe{
+    width: 100%;
+    height: 86px;                /* QQ 外链常见 86~110；你想更紧凑就降 */
+    border: 0;
+    border-radius: 10px;         /* 可选：更像卡片 */
+    overflow: hidden;
+  }
+  
   @media (prefers-color-scheme: dark){
-    .hb-music-fab{
+    .hb-music{
+      background: rgba(15,23,42,0.6);
+      border-color: rgba(148,163,184,0.35);
+    }
+    .hb-music-toggle{ color: rgba(226,232,240,0.9); }
+    .hb-music-body{ border-top-color: rgba(148,163,184,0.3); }
+  }
+  
+  /* Dark mode (best-effort; won't affect other pages) */
+  @media (prefers-color-scheme: dark){
+    .hb-item{ border-top: 1px solid rgba(255,255,255,0.12); }
+    .hb-item:first-of-type{ border-top: 1px solid rgba(255,255,255,0.12); }
+    .hb-search{
+      background: transparent;
+      color: inherit;
+      border-color: rgba(255,255,255,0.22);
+    }
+    .hb-chip{
+      background: transparent;
+      border-color: rgba(255,255,255,0.22);
+    }
+    .hb-search-fab{
       background: rgba(15,23,42,0.72);
       border-color: rgba(148,163,184,0.35);
       color: rgba(226,232,240,0.92);
       box-shadow: 0 10px 28px rgba(0,0,0,0.35);
     }
-    .hb-music-drawer{
+    .hb-search-drawer{
       background: rgba(15,23,42,0.78);
       border-color: rgba(148,163,184,0.35);
       box-shadow: 0 18px 55px rgba(0,0,0,0.45);
     }
-    .hb-music-head{
+    .hb-search-head{
       color: rgba(226,232,240,0.85);
       border-bottom-color: rgba(148,163,184,0.25);
     }
-    .hb-music-close:hover{ background: rgba(148,163,184,0.12); }
+    .hb-search-close:hover{ background: rgba(148,163,184,0.12); }
+    .hb-header .hb-mark-link{ color: inherit; }
+    .hb-back-link{ color: rgba(226,232,240,0.9); }
+    .hb-back-link:hover{ background: rgba(148,163,184,0.12); }
   }
-  .hb-player-wrap {
-  position: relative;
-  width: 100%;
-  height: 86px;
-}
-.hb-player-wrap iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 86px;
-  border: none;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s;
-}
-.hb-player-wrap iframe.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.hb-track-indicator {
-  text-align: center;
-  padding: 4px 0 2px;
-}
-.hb-track-label {
-  font-size: 11px;
-  color: rgba(0,0,0,.4);
-}
-.hb-nav-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 6px;
-}
-.hb-nav-btn {
-  flex: 1;
-  padding: 7px 0;
-  border: 1px solid rgba(0,0,0,.10);
-  border-radius: 8px;
-  background: transparent;
-  font: inherit;
-  font-size: 12px;
-  cursor: pointer;
-}
-.hb-nav-btn:hover { background: rgba(0,0,0,.04); }
-</style>
+  
+  @media (max-width: 600px){
+    .hb-wrap{
+      margin-top: 2.5rem;
+    }
+  }
+  </style>
+  
+  <!-- 音乐：右上角按钮 + 抽屉 -->
+  <style>
+    .hb-music-fab{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.82);
+      box-shadow: 0 10px 28px rgba(15,23,42,0.12);
+      cursor: pointer;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: rgba(0,0,0,0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .hb-music-fab:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(15,23,42,0.14); }
+    .hb-music-fab:focus{ outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.18), 0 14px 34px rgba(15,23,42,0.14); }
+  
+    .hb-music-drawer{
+      position: fixed;
+      right: 18px;
+      bottom: calc(18px + 44px + 10px); /* fab + gap */
+      z-index: 9999;
+      width: min(420px, calc(100vw - 36px));
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 18px 55px rgba(15,23,42,0.18);
+      overflow: hidden;
+      transform: translateY(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .18s ease, opacity .18s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .hb-music-drawer.is-open{
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  
+    .hb-music-head{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid rgba(15,23,42,0.06);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.62);
+    }
+    .hb-music-close{
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.15rem;
+      line-height: 1;
+      opacity: 0.6;
+      padding: 0.1rem 0.35rem;
+      border-radius: 8px;
+    }
+    .hb-music-close:hover{ opacity: 0.9; background: rgba(15,23,42,0.04); }
+  
+    @media (prefers-color-scheme: dark){
+      .hb-music-fab{
+        background: rgba(15,23,42,0.72);
+        border-color: rgba(148,163,184,0.35);
+        color: rgba(226,232,240,0.92);
+        box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      }
+      .hb-music-drawer{
+        background: rgba(15,23,42,0.78);
+        border-color: rgba(148,163,184,0.35);
+        box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+      }
+      .hb-music-head{
+        color: rgba(226,232,240,0.85);
+        border-bottom-color: rgba(148,163,184,0.25);
+      }
+      .hb-music-close:hover{ background: rgba(148,163,184,0.12); }
+    }
+    .hb-player-wrap {
+    position: relative;
+    width: 100%;
+    height: 86px;
+  }
+  .hb-player-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 86px;
+    border: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .hb-player-wrap iframe.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .hb-track-indicator {
+    text-align: center;
+    padding: 4px 0 2px;
+  }
+  .hb-track-label {
+    font-size: 11px;
+    color: rgba(0,0,0,.4);
+  }
+  .hb-nav-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .hb-nav-btn {
+    flex: 1;
+    padding: 7px 0;
+    border: 1px solid rgba(0,0,0,.10);
+    border-radius: 8px;
+    background: transparent;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .hb-nav-btn:hover { background: rgba(0,0,0,.04); }
+
+  /* B站纯音频模式 */
+  .hb-player-wrap.bilibili-mode {
+    height: 160px;
+  }
+  .hb-player-wrap.bilibili-mode iframe {
+    height: 160px;
+  }
+  .hb-bili-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(150deg, rgba(10,12,30,0.94) 0%, rgba(22,10,52,0.91) 100%);
+    border-radius: 8px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #fff;
+  }
+  .hb-player-wrap.bilibili-mode .hb-bili-overlay {
+    display: flex;
+  }
+  .hb-bili-wave {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 22px;
+  }
+  .hb-bili-wave span {
+    display: block;
+    width: 3px;
+    border-radius: 2px;
+    background: rgba(200,180,255,0.8);
+    animation: hb-wave 1.3s ease-in-out infinite;
+  }
+  .hb-bili-wave span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+  .hb-bili-wave span:nth-child(2) { height: 18px; animation-delay: 0.18s; }
+  .hb-bili-wave span:nth-child(3) { height: 12px; animation-delay: 0.36s; }
+  .hb-bili-wave span:nth-child(4) { height: 20px; animation-delay: 0.54s; }
+  .hb-bili-wave span:nth-child(5) { height: 9px;  animation-delay: 0.72s; }
+  @keyframes hb-wave {
+    0%, 100% { transform: scaleY(1); opacity: 0.65; }
+    50%       { transform: scaleY(1.9); opacity: 1; }
+  }
+  .hb-bili-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+  .hb-bili-hint {
+    font-size: 0.65rem;
+    opacity: 0.35;
+  }
+  </style>
