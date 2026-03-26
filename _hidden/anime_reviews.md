@@ -5,6 +5,7 @@ title: 番剧评价记录
 categories: [others, 中文]
 search_only: false
 date: 2025-02-28 09:00:00 +0800
+pinned: true
 ---
 
 <style>
