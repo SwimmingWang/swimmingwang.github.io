@@ -34,6 +34,23 @@
       postView.removeAttribute('hidden');
       postView.setAttribute('aria-hidden', 'false');
       setPostNavVisible(true);
+      
+      // 执行新加载内容中的内联脚本
+      var scripts = postView.querySelectorAll('script');
+      scripts.forEach(function(script) {
+        if (script.src) {
+          var newScript = document.createElement('script');
+          newScript.src = script.src;
+          newScript.onload = function() {};
+          document.head.appendChild(newScript);
+        } else if (script.textContent) {
+          try {
+            eval(script.textContent);
+          } catch (e) {
+            console.error('Script execution error:', e);
+          }
+        }
+      });
     }
   
     function loadPost(href, push) {

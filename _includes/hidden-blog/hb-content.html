@@ -1,5 +1,6 @@
 {% assign filtered = site.hidden | default: site.pages %}
 {% assign filtered = filtered | where_exp: "post", "post.hb_kind != 'anime_review'" %}
+{% assign filtered = filtered | where_exp: "post", "post.hb_kind != 'alcohol_review'" %}
 
 {% comment %}
   Collect all categories that appear in filtered posts
@@ -36,7 +37,11 @@
 {% if filtered == empty or filtered.size == 0 %}
   <div class="hb-quiet">Nothing here yet.</div>
 {% else %}
-  {% assign sorted = filtered | sort: "date" | reverse %}
+  {% assign pinned = filtered | where: "pinned", true %}
+  {% assign unpinned = filtered | where: "pinned", false | where: "pinned", nil %}
+  {% assign sorted_pinned = pinned | sort: "date" | reverse %}
+  {% assign sorted_unpinned = unpinned | sort: "date" | reverse %}
+  {% assign sorted = sorted_pinned | concat: sorted_unpinned %}
   <div id="hb-list" class="hb-list">
     {% for post in sorted %}
       {% assign clean_cats = "" | split: "" %}
@@ -46,7 +51,8 @@
         {% endunless %}
       {% endfor %}
       {% assign search_only_flag = post.search_only | default: false %}
-      <div class="hb-item"
+      {% assign is_pinned = post.pinned | default: false %}
+        <div class="hb-item{% if is_pinned %} hb-pinned{% endif %}"
            data-categories="{{ clean_cats | join: ' ' | downcase | escape_once }}"
            data-title="{{ post.title | downcase | escape_once }}"
            data-text="{{ post.content | strip_html | strip_newlines | downcase | escape_once }}"

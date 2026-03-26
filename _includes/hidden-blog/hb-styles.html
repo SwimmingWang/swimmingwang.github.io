@@ -228,6 +228,20 @@
     border-top: 1px solid rgba(0,0,0,0.08);
   }
   
+  .hb-pinned{
+    background: linear-gradient(90deg, rgba(255,248,235,0.6) 0%, rgba(255,248,235,0) 100%);
+    margin: 0 -1rem;
+    padding: 1.1rem 1rem;
+    border-radius: 6px;
+    border-top: 1px solid rgba(234,192,98,0.3);
+  }
+  
+  .hb-pinned .hb-title::before{
+    content: "📌";
+    margin-right: 0.4rem;
+    font-size: 0.9em;
+  }
+  
   .hb-item:first-of-type{
     border-top: 1px solid rgba(0,0,0,0.08);
   }
@@ -351,6 +365,7 @@
   @media (prefers-color-scheme: dark){
     .hb-item{ border-top: 1px solid rgba(255,255,255,0.12); }
     .hb-item:first-of-type{ border-top: 1px solid rgba(255,255,255,0.12); }
+    .hb-pinned{ background: linear-gradient(90deg, rgba(234,192,98,0.12) 0%, rgba(234,192,98,0) 100%); border-top-color: rgba(234,192,98,0.25); }
     .hb-search{
       background: transparent;
       color: inherit;
