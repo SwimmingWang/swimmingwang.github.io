@@ -8,6 +8,7 @@ hb_kind: anime_review
 poster: https://lain.bgm.tv/r/400/pic/cover/l/77/c3/454684_ZH5tU.jpg
 poster_alt: BanG Dream! Ave Mujica
 rating: 5 (当乐子能到7)
+anime_links:
 ---
 
 时隔多年，终于还是把母鸡卡看完了。之前连载的时候看了一半，剩下4级没看，这神人番看不了一点。看完很多二创再去看番会有不一样的感受，整个番剧全部变成喜剧了，还是太有梗了啊。
