@@ -1,118 +1,416 @@
 ---
 layout: page
-title: "Rubric RL文章阅读"
+title: Rubric RL 相关文章
 categories: [research, paper, 中文]
 search_only: false
 date: 2025-03-17 09:00:00 +0800
-# external_embed: ""
-# external_link: ""
-# external_label: "测试引入谷歌文档"
 pinned: false
 ---
-Note: 2026年2月份阅读的市面上的rubric rl的文章。
 
-# Rubric 文章阅读分类
+<style>
+:root {
+  --blue:    #4a7cf7;
+  --green:   #3ab87a;
+  --purple:  #8b5cf6;
+  --orange:  #f59e0b;
+  --red:     #ef4444;
+  --surface: #f5f7fc;
+  --border:  #e0e6f0;
+  --dim:     #6b7a99;
+  --radius:  10px;
+}
 
-## Rubric 生成
-1. [Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains](https://arxiv.org/pdf/2507.17746) (scale ai) 类似用rubric生成rubric
-2. [DR Tulu: Reinforcement Learning with Evolving Rubrics for Deep Research](https://arxiv.org/pdf/2511.19399) (UW and AI2) 动态更新rubric，动态维护rubric库
-3. [META-REWARDING LANGUAGE MODELS: Self-Improving Alignment with LLM-as-a-Meta-Judge](https://arxiv.org/pdf/2407.19594) meta judge
-4. [Compute as Teacher: Turning Inference Compute Into Reference-Free Supervision](https://arxiv.org/pdf/2509.14234) (meta) Anchor结合多条rollouts合成参考回答, 再生成对应 rubrics
+/* ── Section cards ── */
+.ps {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.6rem;
+  margin: 1.2rem 0;
+}
+.ps.green  { border-left-color: var(--green); }
+.ps.purple { border-left-color: var(--purple); }
+.ps.orange { border-left-color: var(--orange); }
+.ps h4 { margin: 0 0 .8rem; font-size: .9rem; color: var(--dim); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
 
-## Rubric 应用
-[Reinforcement Learning with Rubric Anchors](https://arxiv.org/pdf/2508.12790) (Ant) The first paper to propose rubric rl.
+/* ── Paper rows ── */
+.pe {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: .55rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.pe:last-child { border-bottom: none; }
+.pb {
+  display: inline-flex;
+  align-items: center;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: .2em .6em;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-top: .15rem;
+  flex-shrink: 0;
+  min-width: 54px;
+  justify-content: center;
+}
+.b-scale  { background:#dbeafe; color:#1d4ed8; }
+.b-uw     { background:#dcfce7; color:#15803d; }
+.b-meta   { background:#fce7f3; color:#be185d; }
+.b-ant    { background:#fef3c7; color:#92400e; }
+.b-cmu    { background:#ede9fe; color:#6d28d9; }
+.b-arxiv  { background:#f1f5f9; color:#475569; }
+.b-iclr   { background:#fff7ed; color:#c2410c; }
 
-### 在多个正确轨迹中一致出现的步骤才被视为合理推理步骤
-1. [AUTORUBRIC-R1V: RUBRIC-BASED GENERATIVE REWARDS FOR FAITHFUL MULTIMODAL REASONING](https://arxiv.org/pdf/2510.14738)
+.pi { flex: 1; line-height: 1.5; }
+.pt { font-weight: 600; font-size: .92rem; }
+.pd { font-size: .82rem; color: var(--dim); margin-top: .16rem; }
 
-### 在生成回答的时候就引入部分rubric
-1. [Breaking the Exploration Bottleneck: Rubric-Scaffolded Reinforcement Learning for General LLM Reasoning](https://arxiv.org/pdf/2508.16949)
+/* ── Highlight tag ── */
+.tag {
+  display: inline-block;
+  font-size: .68rem;
+  padding: .1em .5em;
+  border-radius: 4px;
+  margin-left: .4em;
+  vertical-align: middle;
+  font-weight: 600;
+}
+.tag-first { background:#fef3c7; color:#92400e; }
 
-# 其他
-1. [DeepTravel: An End-to-End Agentic Reinforcement Learning Framework for Autonomous Travel Planning Agents](https://arxiv.org/pdf/2509.21842) (Didi travel) interact with a sandbox (iclr:2448)
-2. [Self-Rewarding Rubric-Based Reinforcement Learning for Open-Ended Reasoning](https://arxiv.org/pdf/2509.25534) (ant) rubric-based reward model (iclr:2446)
-3. https://arxiv.org/pdf/2506.02355 (cmu) 提升grpo中概率低但是正确回答的reward
+/* ── Thought box ── */
+.thought {
+  background: linear-gradient(135deg, #f0f4ff 0%, #f9f0ff 100%);
+  border: 1px solid #d4d8f0;
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+  margin: 1.4rem 0;
+  font-size: .9rem;
+  line-height: 1.7;
+}
+.thought h3 { margin-top: 0; font-size: 1rem; }
+.thought ul { margin-bottom: 0; }
 
+/* ── Details (collapsible) ── */
+details { margin: .4rem 0 0; }
+summary {
+  cursor: pointer;
+  font-size: .78rem;
+  color: var(--blue);
+  font-weight: 600;
+  user-select: none;
+}
+summary:hover { text-decoration: underline; }
+details[open] summary { margin-bottom: .5rem; }
+.method-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .9rem 1.1rem;
+  font-size: .83rem;
+  line-height: 1.65;
+  color: #374151;
+}
+.method-box ol, .method-box ul { margin: .4rem 0; padding-left: 1.3rem; }
+.method-box li { margin: .25rem 0; }
 
-# My thoughts
-Rubric生成与Rubric应用
+/* ── TOC ── */
+.toc {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.4rem;
+  display: inline-block;
+  margin-bottom: 1.6rem;
+  font-size: .87rem;
+  min-width: 280px;
+}
+.toc-title { font-weight: 700; margin-bottom: .5rem; color: var(--dim); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+.toc ol, .toc ul { margin: 0; padding-left: 1.2rem; }
+.toc li { margin: .28rem 0; }
+.toc a  { color: var(--blue); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+</style>
 
-生成方面分成hardcode和dynamic update
+> **阅读背景：** 2026 年 2 月系统梳理了市面上关于 **Rubric-based RL** 的工作，从 Rubric 生成、应用到周边方法进行分类整理。
 
-hardcode的问题是颗粒度不够细致，不能涵盖到各个方面，优势是简单易编写
+<div class="toc">
+  <div class="toc-title">📑 目录</div>
+  <ol>
+    <li><a href="#rubric-gen">Rubric 生成</a></li>
+    <li><a href="#rubric-app">Rubric 应用</a>
+      <ul>
+        <li><a href="#consistent-steps">一致推理步骤筛选</a></li>
+        <li><a href="#scaffold">生成时引入 Rubric</a></li>
+      </ul>
+    </li>
+    <li><a href="#more">更多相关工作</a></li>
+    <li><a href="#thoughts">个人思考</a></li>
+    <li><a href="#reading">Paper Reading 摘要</a></li>
+  </ol>
+</div>
 
-dynamic update的问题是难以维护rule library，优势是能够根据不同的query来动态调整，更加适配
+---
 
-(UW and AI2)的有篇文章研究了rubric的更新方法，见[分析](https://chatgpt.com/share/6969d9df-a544-8006-bd23-54725663397f)
+## 📐 Rubric 生成 {#rubric-gen}
 
-我的想法是是否需要看note来进行rubric的生成，以及供给侧的data所包含的多样性与模型真正认为的多样性也是有区别的
+<div class="ps">
 
-蒙特卡洛是生成多样性的一种方法，通过寻找同级节点或父子级节点来生成多样性
+<div class="pe">
+  <span class="pb b-scale">Scale AI</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2507.17746">Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains</a></div>
+    <div class="pd">用 LLM 基于已有 Rubric 生成新 Rubric，突破可验证域的限制</div>
+  </div>
+</div>
 
-## Paper Reading
+<div class="pe">
+  <span class="pb b-uw">UW / AI2</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2511.19399">DR Tulu: Reinforcement Learning with Evolving Rubrics for Deep Research</a></div>
+    <div class="pd">动态更新 Rubric，维护随训练演化的 Rubric 库，更好适配 query 分布变化</div>
+  </div>
+</div>
 
-[ArenaRL: Scaling RL for Open-Ended Agents via Tournament-based Relative Ranking](https://arxiv.org/pdf/2601.06487v1) 
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2407.19594">META-REWARDING LANGUAGE MODELS: Self-Improving Alignment with LLM-as-a-Meta-Judge</a></div>
+    <div class="pd">引入 Meta Judge 机制，模型自我提升对齐能力，判断者与被判断者互相强化</div>
+  </div>
+</div>
 
-将传统的grpo的组内打分比较方式变成两两LLM-as-a-judge比较，通过使用种子轮，瑞士轮等排序方法探索低复杂度的拓扑排序方法，数据集是自建的
+<div class="pe">
+  <span class="pb b-meta">Meta</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2509.14234">Compute as Teacher: Turning Inference Compute Into Reference-Free Supervision</a></div>
+    <div class="pd">Anchor 结合多条 rollouts 合成参考回答，再基于参考回答生成对应 Rubric，无需人工标注参考答案</div>
+  </div>
+</div>
 
-[Rubric-Based Benchmarking and Reinforcement Learning for Advancing LLM Instruction Following](https://arxiv.org/pdf/2511.10507v1) 
+</div>
 
-训练两个模型：Rubric Generator and Rubric Verifier. Rubric Generator用于自动生成训练数据中的指令对应的 rubrics，以便在大规模数据上生成训练奖励。先基于小规模专家数据训练一个生成器，然后应用到更大规模数据。
+---
 
+## 🎯 Rubric 应用 {#rubric-app}
 
-[OpenRubrics: Towards Scalable Synthetic Rubric Generation for Reward Modeling and LLM Alignment](https://arxiv.org/pdf/2510.07743) 
+<div class="ps green">
 
-使用提示（Prompt + 优选回答 + 被拒回答）作为上下文，训练一个 Rubric 生成模型。把 Rubrics 分成Hard Rules和Principles，有些评价标准是必须被严格满足的，有些评价标准是只能被模糊地权衡的，但奖励模型不能用同一种语义地位去对待这两种东西。
+<div class="pe">
+  <span class="pb b-ant">Ant</span>
+  <div class="pi">
+    <div class="pt">
+      <a href="https://arxiv.org/pdf/2508.12790">Reinforcement Learning with Rubric Anchors</a>
+      <span class="tag tag-first">🏆 First Paper</span>
+    </div>
+    <div class="pd">首个提出 Rubric RL 框架的工作，将结构化评分标准引入强化学习奖励设计</div>
+  </div>
+</div>
 
-[AUTO-RUBRIC: Learning to Extract Generalizable Criteria for Reward Modeling](https://arxiv.org/pdf/2510.17314)
+</div>
 
-<details>
-<summary> method intro </summary>
-1. Query-Specific Rubric Inference（查询特定准则提取）
+### 一致推理步骤筛选 {#consistent-steps}
 
-对每一个偏好样本（query + 正回答 + 负回答）构造一个Propose–Evaluate–Revise 循环：
+> 只有在多条正确轨迹中**一致出现**的步骤，才被视为合理的推理步骤。
 
-Propose（提出）：用一个生成模型生成初步的评价准则草案；
+<div class="ps green">
 
-Evaluate（评估）：评估模型按这个准则是否能正确区分正/负回答；
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2510.14738">AUTORUBRIC-R1V: Rubric-Based Generative Rewards for Faithful Multimodal Reasoning</a></div>
+    <div class="pd">通过跨轨迹一致性过滤噪声推理步骤，生成更可信的多模态推理奖励信号</div>
+  </div>
+</div>
 
-Revise（修正）：如果评估失败，则用修订模型修正准则，并再次验证。
+</div>
 
-这个循环像是在围绕每个样本“反向推理出它内在的评判标准”。这样对每个偏好样本都能生成较高质量的“query-specific rubric”。
+### 生成时引入 Rubric {#scaffold}
 
-2. Query-Agnostic Rubric Aggregation（跨查询准则聚合）
+> 在生成回答的过程中就注入部分 Rubric 作为脚手架（Scaffold），引导探索方向。
 
-把所有 query-specific 准则放在一起，因为它们可能重复、过于具体或互相冲突，需要精炼成一个更小的通用准则集。
+<div class="ps green">
 
-这个阶段用一种**信息论驱动的最大化编码率（coding rate）**算法来选择一个紧凑集合，使最终的规则具有：
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2508.16949">Breaking the Exploration Bottleneck: Rubric-Scaffolded RL for General LLM Reasoning</a></div>
+    <div class="pd">在生成阶段嵌入 Rubric 结构约束，缓解 RL 训练中的探索瓶颈问题</div>
+  </div>
+</div>
 
-高覆盖度：能适用于不同查询；
+</div>
 
-低冗余性：避免重复或类似内容；
+---
 
-高信息量：最大化语义表达能力。
+## 📚 Paper Reading 摘要 {#reading}
 
-最终输出的结构化规则被称作 “Theme–Tips” 结构：高层 Theme（总体主题，如“逻辑性优先”） 下有具体 Tips（具体提示，如“确保回答因果关系清晰”）。</details>
+<div class="ps orange">
 
-[Reward and Guidance through Rubrics: Promoting Exploration to Improve Multi-Domain Reasoning](https://arxiv.org/pdf/2511.12344)
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2601.06487v1">ArenaRL: Scaling RL for Open-Ended Agents via Tournament-based Relative Ranking</a></div>
+    <div class="pd">将 GRPO 的组内打分替换为两两 LLM-as-a-Judge 比较；采用种子轮、瑞士轮等排序方法探索低复杂度拓扑排序，数据集自建</div>
+  </div>
+</div>
 
-<details><summary>method intro</summary>
-对于每一个训练迭代：
-    1. 使用当前策略生成多个回答/推理轨迹
-    2. 用 Rubric 评估这些轨迹（Factual + Process）
-    3. 计算稠密奖励，更新策略参数（基于 GRPO）
-    4. 离线收集高评分但未完美的轨迹
-    5. 对这些轨迹进行分析生成指导信号
-    6. 将指导信号用于离线策略 refinement
-</details>
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2511.10507">AdvancedIF: Rubric-Based Benchmarking and Reinforcement Learning for Advancing LLM Instruction Following
+</a></div>
+    <div class="pd">训练 <strong>Rubric Generator</strong> + <strong>Rubric Verifier</strong> 双模型：Generator 基于小规模专家数据训练后扩展到大规模，自动为训练数据生成对应 Rubric</div>
+  </div>
+</div>
 
-[Chasing the Tail: Effective Rubric-based Reward Modeling for Large Language Model Post-Training](https://arxiv.org/pdf/2509.21500) 
-步骤 1 — Rubric 构造。选取一批离策略响应（高质量候选）。由 proposer LLM（例如 GPT-4.1）分析候选响应之间的差异。为每个候选对构建细粒度判别标准（rubric criterion），例如某一个输出是否包含一些核心要素。
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2510.07743">OpenRubrics: Towards Scalable Synthetic Rubric Generation for Reward Modeling and LLM Alignment</a></div>
+    <div class="pd">以「Prompt + 优选回答 + 被拒回答」为上下文训练 Rubric 生成模型；将 Rubric 分为 <em>Hard Rules</em>（必须严格满足）和 <em>Principles</em>（可模糊权衡），避免奖励模型混淆两类标准</div>
+  </div>
+</div>
 
-步骤 2 — Rubric 细化（Iterative Refinement。通过迭代流程，从最好的响应候选开始，每轮：用当前 rubric 对候选集排序；选出当前评分最高的两个响应；再次提取更细粒度的标准，将其加入现有 rubric；持续迭代直到完成一个高判别能力的 rubric 集。
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2510.17314">AUTO-RUBRIC: Learning to Extract Generalizable Criteria for Reward Modeling</a></div>
+    <div class="pd">两阶段框架：① Query-Specific Rubric Inference（Propose–Evaluate–Revise 循环）；② Query-Agnostic Rubric Aggregation（信息论驱动的最大化编码率选出紧凑通用准则集），输出 Theme–Tips 层次结构</div>
+    <details>
+      <summary>展开方法细节</summary>
+      <div class="method-box">
+        <strong>阶段一：Query-Specific Rubric Inference</strong>
+        <ol>
+          <li><strong>Propose：</strong>用生成模型为偏好样本（query + 正回答 + 负回答）生成初步评价准则草案</li>
+          <li><strong>Evaluate：</strong>评估模型检验准则是否能正确区分正/负回答</li>
+          <li><strong>Revise：</strong>若评估失败，修订模型修正准则并重新验证，循环直至收敛</li>
+        </ol>
+        <strong>阶段二：Query-Agnostic Rubric Aggregation</strong>
+        <ul>
+          <li>用信息论驱动的<strong>最大化编码率（Coding Rate）</strong>算法，从所有 query-specific 准则中选出紧凑集合</li>
+          <li>目标：高覆盖度 × 低冗余性 × 高信息量</li>
+          <li>输出 <strong>Theme–Tips</strong> 层次结构（高层主题 + 具体提示）</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</div>
 
-[Inference-Time Scaling for Generalist Reward Modeling](https://arxiv.org/pdf/2504.02495)
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2511.12344">Reward and Guidance through Rubrics: Promoting Exploration to Improve Multi-Domain Reasoning</a></div>
+    <div class="pd">稠密 Rubric 奖励（Factual + Process）+ GRPO 策略更新；离线收集高评分未完美轨迹生成指导信号，用于离线策略 refinement</div>
+    <details>
+      <summary>展开训练流程</summary>
+      <div class="method-box">
+        <ol>
+          <li>使用当前策略生成多个回答 / 推理轨迹</li>
+          <li>用 Rubric 评估轨迹（Factual + Process 两维度）</li>
+          <li>计算稠密奖励，基于 GRPO 更新策略参数</li>
+          <li>离线收集高评分但未完美的轨迹</li>
+          <li>分析这些轨迹，生成指导信号</li>
+          <li>将指导信号用于离线策略 refinement</li>
+        </ol>
+      </div>
+    </details>
+  </div>
+</div>
 
-[RubricRL: Simple Generalizable Rewards for Text-to-Image Generation](https://arxiv.org/pdf/2511.20651) 这篇是图片生成的。给定输入提示词 Prompt p，RubricRL 使用一个 Rubric Generation Model（如 GPT-o4-mini） 自动生成一组细粒度评估标准（Rubrics）
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2509.21500">Chasing the Tail: Effective Rubric-based Reward Modeling for LLM Post-Training</a></div>
+    <div class="pd">两步 Rubric 构造：① Proposer LLM（如 GPT-4.1）分析离策略响应差异，生成细粒度判别标准；② 迭代细化——从最优响应出发逐步添加更精细标准，直到获得高判别力 Rubric 集</div>
+  </div>
+</div>
 
-[An Efficient Rubric-based Generative Verifier for Search-Augmented LLMs](https://arxiv.org/pdf/2510.14660) 
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2504.02495">Inference-Time Scaling for Generalist Reward Modeling</a></div>
+    <div class="pd">在推理阶段扩展计算量以提升通用奖励模型的评估质量，探索 Test-Time Scaling 在 RM 场景的有效性</div>
+  </div>
+</div>
+
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2511.20651">RubricRL: Simple Generalizable Rewards for Text-to-Image Generation</a></div>
+    <div class="pd">将 Rubric RL 扩展到图像生成领域，由 GPT-o4-mini 自动为输入 Prompt 生成细粒度评估标准</div>
+  </div>
+</div>
+
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2510.14660">An Efficient Rubric-based Generative Verifier for Search-Augmented LLMs</a></div>
+    <div class="pd">面向检索增强 LLM 的高效 Rubric 生成式验证器，兼顾验证精度与推理效率</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+## 🗂 更多相关工作 {#more}
+
+<div class="ps purple">
+
+<div class="pe">
+  <span class="pb b-arxiv">Didi</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2509.21842">DeepTravel: An End-to-End Agentic RL Framework for Autonomous Travel Planning</a></div>
+    <div class="pd">Agent 与沙箱环境交互的端到端旅行规划 RL 框架 <span class="tag" style="background:#e0f2fe;color:#0369a1;">ICLR 2448</span></div>
+  </div>
+</div>
+
+<div class="pe">
+  <span class="pb b-ant">Ant</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2509.25534">Self-Rewarding Rubric-Based RL for Open-Ended Reasoning</a></div>
+    <div class="pd">基于 Rubric 的自奖励强化学习，无需外部评分器即可处理开放式推理任务 <span class="tag" style="background:#e0f2fe;color:#0369a1;">ICLR 2446</span></div>
+  </div>
+</div>
+
+<div class="pe">
+  <span class="pb b-cmu">CMU</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2506.02355">Improving Reward for Low-Probability Correct Answers in GRPO</a></div>
+    <div class="pd">提升 GRPO 训练中概率低但正确回答的奖励权重，缓解少数正确样本被忽视的问题</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+## 💡 个人思考 {#thoughts}
+
+<div class="thought">
+
+<h3>Rubric 生成 vs. Rubric 应用</h3>
+
+生成方面分为 **Hardcode** 和 **Dynamic Update** 两种策略：
+
+- **Hardcode** — 简单易编写，但粒度不够细，难以覆盖所有评估维度
+- **Dynamic Update** — 能根据不同 query 动态调整，适配性更强，但 Rule Library 的维护成本较高
+
+UW & AI2 的工作专门研究了 Rubric 更新方法，见[分析笔记](https://chatgpt.com/share/6969d9df-a544-8006-bd23-54725663397f)。
+
+---
+
+**几个悬而未决的问题：**
+
+- 是否应该结合笔记（Note）来辅助 Rubric 生成？
+- 供给侧数据所包含的多样性，与模型真正感知到的多样性之间存在差距，如何弥合？
+- **蒙特卡洛树搜索**可能是生成多样性的有效手段——通过寻找同级节点或父子节点来构造多样化的推理轨迹
+
+</div>
+
+---
