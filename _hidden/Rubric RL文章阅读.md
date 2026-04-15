@@ -275,6 +275,14 @@ details[open] summary { margin-bottom: .5rem; }
     <div class="pd">以「Prompt + 优选回答 + 被拒回答」为上下文训练 Rubric 生成模型；将 Rubric 分为 <em>Hard Rules</em>（必须严格满足）和 <em>Principles</em>（可模糊权衡），避免奖励模型混淆两类标准</div>
   </div>
 </div>
+<div class="pe">
+  <span class="pb b-arxiv">arXiv</span>
+  <div class="pi">
+    <div class="pt"><a href="https://arxiv.org/pdf/2508.16949v3">Breaking the Exploration Bottleneck: Rubric-Scaffolded Reinforcement Learning for General LLM Reasoning</a></div>
+    <div class="pd">Rubric 不应该只在训练结束后拿来评分，它还应该在生成过程中作为“外部认知脚手架”，帮助模型走出自己原本想不到的推理路径。</div>
+  </div>
+</div>
+ 
 
 <div class="pe">
   <span class="pb b-arxiv">arXiv</span>

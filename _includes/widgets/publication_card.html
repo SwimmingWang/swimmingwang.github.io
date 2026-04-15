@@ -1,7 +1,14 @@
 {% assign publications = include.publications %}
 <div class="my-2 p-0 bg-white shadow-sm rounded-sm">
-    <h6 class="publication-title border-bottom border-gray p-4 mb-0">
-        Publications
+    <h6 class="publication-title border-bottom border-gray p-4 mb-0 d-flex align-items-center justify-content-between">
+        <span>
+            {{ include.title | default: "Publications" }}
+        </span>
+        {% if include.action_url and include.action_label %}
+        <a class="btn btn-sm btn-outline-primary ml-3" href="{{ include.action_url | relative_url }}">
+            {{ include.action_label }}
+        </a>
+        {% endif %}
     </h6>
     {% for item in publications limit:include.limit %}
         {% include widgets/publication_item.html item=item first=false last=false %}    

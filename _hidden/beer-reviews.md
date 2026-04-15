@@ -3,7 +3,7 @@ layout: page
 title: 大酒测评
 permalink: /beer-reviews/
 categories: [others, 中文]
-search_only: false
+search_only: true
 date: 2025-03-23 09:00:00 +0800
 pinned: true
 ---

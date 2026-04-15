@@ -2,7 +2,8 @@
 title: "A User-customized and Untethered Electro-haptic Device for Immersive Human-Machine Interaction"
 date: 2025-11-25
 selected: true
-# pub: "EMNLP 2025 Findings"
+pub: "In submission to UIST 2026"
+selected: true
 # pub_date: "2025"
 # pub_last: ' <span class="badge badge-pill badge-primary">Oral (1.8%)</span>'
 cover: /assets/images/covers/personalized_glove_image.png
